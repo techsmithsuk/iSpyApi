@@ -10,6 +10,7 @@ public class ISpyApplication {
 		SpringApplication.run(ISpyApplication.class, args);
 		System.out.println("Hello World!!!");
 		//Test pushing to master
+		//Test number 2: pushing directly to master
 	}
 
 }
