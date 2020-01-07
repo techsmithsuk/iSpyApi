@@ -8,6 +8,7 @@ class ISpyApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assert(true);
 	}
 
 }
