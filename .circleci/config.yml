@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:latest
+      - image: circleci/openjdk:113-boot-buster
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
