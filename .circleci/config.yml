@@ -44,4 +44,4 @@ jobs:
 
       - codecov/upload:
           conf: codecov.yml
-          file: target/jacoco.exec
+          file: target/site/jacoco/jacoco.xml
