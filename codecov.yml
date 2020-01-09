@@ -3,8 +3,7 @@ codecov:
         require_ci_to_pass: yes
 
 coverage:
-    ignore:
-        - "**/AppConfig.java"
+
     status:
         project:
             default:
@@ -20,4 +19,5 @@ coverage:
                 if_ci_failed: error
                 informational: False
                 only_pulls: false
-
+    ignore:
+        - 'src/main/java/com/techswitch/ispy/config/AppConfig.java'
