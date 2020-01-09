@@ -20,4 +20,10 @@ coverage:
                 only_pulls: false
 
     ignore:
-        - "src/src/main/java/com/techswitch/ispy/config/AppConfig.java"
+        - "src/main/java/com/techswitch/ispy/config/AppConfig.java"
+        - "main/java/com/techswitch/ispy/config/AppConfig.java"
+        - "java/com/techswitch/ispy/config/AppConfig.java"
+        - "com/techswitch/ispy/config/AppConfig.java"
+        - "techswitch/ispy/config/AppConfig.java"
+        - "ispy/config/AppConfig.java"
+        - "config/AppConfig.java"
