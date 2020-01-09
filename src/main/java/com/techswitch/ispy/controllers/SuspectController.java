@@ -7,14 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HomeController {
+public class SuspectController {
 
     ObjectMapper objectMapper = new ObjectMapper();
-
-    @RequestMapping("/")
-    public String home() {
-        return "";
-    }
 
     @RequestMapping("/suspect")
     public String suspect() throws JsonProcessingException {

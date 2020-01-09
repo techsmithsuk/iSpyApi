@@ -4,7 +4,7 @@ public class Suspect {
     String name;
 
     public Suspect() {
-        this.name = "Techswitch";
+        this.name = "BaddieMcBad";
     }
 
     public String getName() {
