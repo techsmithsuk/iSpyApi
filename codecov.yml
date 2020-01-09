@@ -3,7 +3,20 @@ codecov:
         require_ci_to_pass: yes
 
 coverage:
-    precision: 2  
-    round: nearest  
-    range: "100...100"
+    coverage:
+        status:
+            project:
+                default:
+                    # basic
+                    target: 100%
+                    threshold: null
+                    base: auto
+                    flags: null
+                    paths: null
+                    # advanced
+                    branches: null
+                    if_not_found: success
+                    if_ci_failed: error
+                    informational: False
+                    only_pulls: false
 
