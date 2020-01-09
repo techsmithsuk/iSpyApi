@@ -20,4 +20,5 @@ coverage:
                 informational: False
                 only_pulls: false
     ignore:
-        - "src/main/java/com/techswitch/ispy/config/AppConfig.java"
+        - "**/AppConfig*"
+        - "**/ISpyApplication*"
