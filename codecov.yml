@@ -18,7 +18,6 @@ coverage:
                 if_ci_failed: error
                 informational: False
                 only_pulls: false
-                
+
     ignore:
-        - "src\main\java\com\techswitch\ispy\config\AppConfig.java",
-        - "src\main\java\com\techswitch\ispy\ISpyApplication.java"
+        - "src\main\java\com\techswitch\ispy\config\AppConfig.java"
