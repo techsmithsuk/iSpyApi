@@ -5,7 +5,9 @@ coverage:
         project:
             default:
                 target: 100%
-        patch: off
+        patch:
+            default:
+                target: 100%
 ignore:
     - "src/main/java/com/techswitch/ispy/config/AppConfig.java"
     - "src/main/java/com/techswitch/ispy/ISpyApplication.java"
