@@ -1,6 +1,6 @@
-codecov:
-    notify:
-        require_ci_to_pass: yes
+#codecov:
+#    notify:
+#        require_ci_to_pass: yes
 
 coverage:
     range: 70..100
@@ -22,5 +22,5 @@ coverage:
 #                informational: False
 #                only_pulls: false
 ignore:
-    - "**/AppConfig*"
-    - "**/ISpyApplication*"
+    - "src/main/java/com/techswitch/ispy/config/AppConfig.java"
+    - "src/main/java/com/techswitch/ispy/ISpyApplication.java"
