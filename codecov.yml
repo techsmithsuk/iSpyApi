@@ -1,26 +1,11 @@
-#codecov:
-#    notify:
-#        require_ci_to_pass: yes
-
 coverage:
     range: 70..100
     round: down
     status:
         project:
-            target: 100%
+            default:
+                target: 100%
         patch: off
-#            default:
-#                # basic
-#                threshold: null
-#                base: auto
-#                flags: null
-#                paths: null
-#                # advanced
-#                branches: null
-#                if_not_found: success
-#                if_ci_failed: error
-#                informational: False
-#                only_pulls: false
 ignore:
     - "src/main/java/com/techswitch/ispy/config/AppConfig.java"
     - "src/main/java/com/techswitch/ispy/ISpyApplication.java"
