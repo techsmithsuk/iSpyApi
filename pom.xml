@@ -73,6 +73,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+    
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
@@ -97,10 +98,11 @@
 			<artifactId>jdbi3-core</artifactId>
 			<version>3.4.0</version>
 		</dependency>
+    
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
+			<version>2.9.10.1</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -10,5 +10,4 @@ public class Suspect {
     public String getName() {
         return name;
     }
-    
 }
