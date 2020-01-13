@@ -40,7 +40,7 @@ class SuspectsControllerServiceTest {
 
     @Test
     void getListofSuspects() {
-        List<Suspect> allSuspects = suspectsController.getSuspectList(1);
+        List<Suspect> allSuspects = suspectsController.getSuspectList(1,10);
 
         assertThat(allSuspects.get(0).getId()).isEqualTo(1);
         assertThat(allSuspects.get(0).getName()).isEqualTo("Harry Potter");
