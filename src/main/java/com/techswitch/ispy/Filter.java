@@ -5,11 +5,7 @@ public class Filter {
 
     private Integer page;
     private Integer pageSize;
-
-    public Integer getPage() {
-        return page;
-    }
-
+    
     public void setPage(Integer page) {
         this.page = page;
     }
