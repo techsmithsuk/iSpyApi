@@ -1,22 +1,26 @@
 package com.techswitch.ispy.models;
 
+import com.techswitch.ispy.models.validator.ValidDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotNull;
 
 public class Report {
 
-    private Long id;
     private Long suspectId;
+    @ValidDate
     private String date;
     private String location;
+    @NotNull
     private String description;
 
-    public Long getId() {
-        return id;
+    public Report() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Report(Long suspectId, String date, String location, String description) {
+        this.suspectId = suspectId;
+        this.date = date;
+        this.location = location;
+        this.description = description;
     }
 
     public Long getSuspectId() {
@@ -49,16 +53,5 @@ public class Report {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Report{" +
-                "id=" + id +
-                ", suspectId=" + suspectId +
-                ", date='" + date + '\'' +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }
