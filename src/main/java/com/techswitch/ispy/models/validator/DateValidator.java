@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
 public class DateValidator implements ConstraintValidator<ValidDate, String> {
 
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value.isEmpty()){
+            return true;
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate ld = LocalDate.parse(value, formatter);

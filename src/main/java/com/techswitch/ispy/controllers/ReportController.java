@@ -30,7 +30,6 @@ public class ReportController {
         if(result.hasErrors()){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-
         Long savedReportId = reportService.createReport(report);
         if(savedReportId == null || savedReportId < 1){
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

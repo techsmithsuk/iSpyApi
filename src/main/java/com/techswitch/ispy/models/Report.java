@@ -2,6 +2,7 @@ package com.techswitch.ispy.models;
 
 import com.techswitch.ispy.models.validator.ValidDate;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Report {
@@ -10,7 +11,7 @@ public class Report {
     @ValidDate
     private String date;
     private String location;
-    @NotNull
+    @NotNull @NotEmpty
     private String description;
 
     public Report() {

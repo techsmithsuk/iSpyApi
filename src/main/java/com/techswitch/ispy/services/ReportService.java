@@ -18,6 +18,7 @@ public class ReportService extends DatabaseService {
     }
 
     public Long createReport(Report report){
+        try{
            return jdbi.withHandle(handle ->
                     handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description) " +
                             "VALUES (:suspectId, :date::date, :location, :description) RETURNING id")
@@ -28,5 +29,8 @@ public class ReportService extends DatabaseService {
                             .mapTo(Long.class)
                             .findOnly()
             );
+        }catch (Exception e){
+            return 0L;
+        }
     }
 }
