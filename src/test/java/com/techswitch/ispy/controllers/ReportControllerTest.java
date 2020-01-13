@@ -30,6 +30,9 @@ public class ReportControllerTest {
     @MockBean
     private ReportService reportService;
 
+    @MockBean(name = "databaseUrl")
+    private String databaseUrl;
+
     @Test
     public void givenValidRequest_thenStatusIsCreated() throws Exception {
         Report report = new Report(1L, "12-02-2019", "London", "description text");
