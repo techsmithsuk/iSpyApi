@@ -1,6 +1,7 @@
 package com.techswitch.ispy.services;
 
 import com.techswitch.ispy.models.Report;
+import com.techswitch.ispy.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ public class ReportService extends DatabaseService {
     }
 
     public ResponseEntity createReport(Report report) {
+        AppUtils.log("createReport", "[REPORT] - Started executing sql query to add a new report to database");
         try {
             jdbi.useHandle(handle ->
                     handle.createUpdate("INSERT INTO reports (suspect_id, date_of_sighting, location, description) " +
@@ -27,9 +29,10 @@ public class ReportService extends DatabaseService {
                             .execute()
             );
         }catch (Exception e){
-            System.err.println(e.getMessage());
+            AppUtils.logCatchException("createReport", "[REPORT] - Error executing sql query to add a new report to database", e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        AppUtils.log("createReport", "[REPORT] - Successfully executed sql query. Report has been added to database");
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }
