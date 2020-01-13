@@ -11,7 +11,8 @@ public class Report {
     @ValidDate
     private String date;
     private String location;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
     private String description;
 
     public Report() {
