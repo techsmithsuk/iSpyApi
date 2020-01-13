@@ -42,6 +42,7 @@ class SuspectsControllerServiceTest {
     void getListofSuspects() {
         List<Suspect> allSuspects = suspectsController.getSuspectList(1);
 
+        assertThat(allSuspects.get(0).getId()).isEqualTo(1);
         assertThat(allSuspects.get(0).getName()).isEqualTo("Harry Potter");
         assertThat(allSuspects.get(0).getImageUrl()).isEqualTo("https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb");
     }

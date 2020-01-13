@@ -6,7 +6,6 @@ public class Filter {
     private Integer page;
     private Integer pageSize;
 
-
     public Integer getPage() {
         return page;
     }
