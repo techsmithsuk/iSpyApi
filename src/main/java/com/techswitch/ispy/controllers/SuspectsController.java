@@ -1,9 +1,7 @@
 package com.techswitch.ispy.controllers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.Suspect;
-
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,8 +24,8 @@ public class SuspectsController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @RequestMapping("/allsuspects/page{pageNumber}&page_size{pageSize}")
-    public List<Suspect> getSuspectList(@PathVariable("pageNumber") Integer pageNumber,@PathVariable("pageSize") Integer pageSize) {
+    @RequestMapping("/allsuspects/page={pageNumber}&page_size={pageSize}")
+    public List<Suspect> getSuspectList(@PathVariable("pageNumber") Integer pageNumber, @PathVariable("pageSize") Integer pageSize) {
         Filter filter = new Filter();
         filter.setPage(pageNumber);
         filter.setPageSize(pageSize);
