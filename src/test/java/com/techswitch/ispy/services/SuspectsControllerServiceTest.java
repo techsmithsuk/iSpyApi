@@ -20,10 +20,9 @@ class SuspectsControllerServiceTest {
 
     @BeforeAll
     static void init() {
-        suspectsService = new SuspectsService("jdbc:h2:~/test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE");
+        jdbi = Jdbi.create("jdbc:h2:~/test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE");
+        suspectsService = new SuspectsService(jdbi);
         suspectsController = new SuspectsController(suspectsService);
-
-        jdbi = suspectsService.jdbi;
 
         jdbi.withHandle(handle -> handle.execute("CREATE TABLE all_suspects (\n" +
                 " \tid serial  primary key, \n" +
