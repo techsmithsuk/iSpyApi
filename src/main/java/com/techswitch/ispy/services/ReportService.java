@@ -19,23 +19,18 @@ public class ReportService {
         this.jdbi = jdbi;
     }
 
-    public Long createReport(Report report){
-        try{
-           return jdbi.withHandle(handle ->
-                    handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
-                            "VALUES (:suspectId, :date::date, :location, :description, :timestampSubmitted::timestamp) RETURNING id")
-                            .bind("suspectId", report.getSuspectId())
-                            .bind("date", report.getDate())
-                            .bind("location", report.getLocation())
-                            .bind("description", report.getDescription())
-                            .bind("timestampSubmitted", Timestamp.valueOf(LocalDateTime.now()))
-                            .mapTo(Long.class)
-                            .findOne()
-                            .get()
-            );
-        }catch (Exception e){
-            System.err.println(e.getMessage());
-            return 0L;
-        }
+    public Long createReport(Report report) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
+                        "VALUES (:suspectId, :date::date, :location, :description, :timestampSubmitted::timestamp) RETURNING id")
+                        .bind("suspectId", report.getSuspectId())
+                        .bind("date", report.getDate())
+                        .bind("location", report.getLocation())
+                        .bind("description", report.getDescription())
+                        .bind("timestampSubmitted", Timestamp.valueOf(LocalDateTime.now()))
+                        .mapTo(Long.class)
+                        .findOne()
+                        .get()
+        );
     }
 }
