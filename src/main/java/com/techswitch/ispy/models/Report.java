@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Report {
-
+    @NotNull
     private Long suspectId;
     @ValidDate
     private String date;

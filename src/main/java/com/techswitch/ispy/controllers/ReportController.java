@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-@RestController()
+@RestController
 @RequestMapping("report")
 public class ReportController {
 
@@ -34,7 +34,6 @@ public class ReportController {
         if(savedReportId == null || savedReportId < 1){
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }
