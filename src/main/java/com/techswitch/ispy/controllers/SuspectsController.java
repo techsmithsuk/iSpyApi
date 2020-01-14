@@ -1,9 +1,7 @@
 package com.techswitch.ispy.controllers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.Suspect;
-
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

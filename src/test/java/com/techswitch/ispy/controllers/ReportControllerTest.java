@@ -28,10 +28,6 @@ public class ReportControllerTest {
     @Autowired
     private Jdbi jdbi;
 
-    public void deleteLastReport() {
-        jdbi.withHandle(handle -> handle.createUpdate("DELETE FROM reports WHERE  id = (SELECT id FROM reports ORDER  BY id DESC LIMIT  1);").execute());
-    }
-
     @Test
     public void givenValidRequest_thenStatusIsCreated() throws Exception {
         Report report = new Report(1L, "12-02-2019", "London", "description text");

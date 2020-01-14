@@ -1,5 +1,4 @@
 package com.techswitch.ispy.services;
-
 import com.techswitch.ispy.models.Report;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
 
 @Service
 public class ReportService {
