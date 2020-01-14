@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-api-staging.herokuapp.com", "https://techswitch-i-spy-api.herokuapp.com"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-staging.herokuapp.com/", "https://techswitch-i-spy.herokuapp.com"})
 public class SuspectsController {
 
     private SuspectsService suspectsService;
