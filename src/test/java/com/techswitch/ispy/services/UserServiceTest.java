@@ -17,12 +17,8 @@ class UserServiceTest {
 
     @BeforeAll
     static void init() {
-        DataSource dataSource = DataSourceBuilder.create()
-                .driverClassName("org.h2.Driver")
-                .url("jdbc:h2:~/test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE")
-                .build();
-        userService = new UserService(dataSource);
-        jdbi = userService.jdbi;
+        jdbi = Jdbi.create("jdbc:h2:~/test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE");
+        userService = new UserService(jdbi);
 
         jdbi.withHandle(handle -> handle.execute("CREATE TABLE users (id int serial primary key, username varchar(100) not null unique);"));
         jdbi.withHandle(handle -> handle.execute("INSERT INTO users (id,username) VALUES (1,'Tom09');"));

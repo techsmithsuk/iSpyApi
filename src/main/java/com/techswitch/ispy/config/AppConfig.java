@@ -1,5 +1,6 @@
 package com.techswitch.ispy.config;
 
+import org.jdbi.v3.core.Jdbi;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,4 +18,8 @@ public class AppConfig {
                 .build();
     }
 
+    @Bean
+    public Jdbi getJdbi(DataSource dataSource) {
+        return Jdbi.create(dataSource);
+    }
 }
