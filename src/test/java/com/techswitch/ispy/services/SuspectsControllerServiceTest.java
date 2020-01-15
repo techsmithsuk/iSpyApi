@@ -31,7 +31,7 @@ class SuspectsControllerServiceTest {
     @Test
     void getListOfSuspects() throws Exception {
 
-        mockMvc.perform(get("htttp://localhost/suspects"))
+        mockMvc.perform(get("htttp://localhost/suspects?page=1&pageSize=10"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("Harry Potter"))
                 .andExpect(jsonPath("[0].imageUrl").value("https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb"))
