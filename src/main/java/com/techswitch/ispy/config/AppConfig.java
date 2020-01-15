@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 public class AppConfig {
 
     @Bean
-//    @Primary
     public DataSource getDataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
