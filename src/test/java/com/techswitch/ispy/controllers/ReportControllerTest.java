@@ -1,10 +1,8 @@
 package com.techswitch.ispy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techswitch.ispy.config.AppConfig;
 import com.techswitch.ispy.config.IntegrationTestConfig;
 import com.techswitch.ispy.models.Report;
-import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -41,7 +39,7 @@ public class ReportControllerTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.suspectId").value("1"))
-                .andExpect(jsonPath("$.dateOfSighting").value("2019-02-12"))
+                .andExpect(jsonPath("$.dateOfSighting").value("12-02-2019"))
                 .andExpect(jsonPath("$.location").value("London"))
                 .andExpect(jsonPath("$.description").value("description text"))
                 .andExpect(jsonPath("$.timestampSubmitted").exists())

@@ -21,7 +21,9 @@ public class ReportService {
     public ReportViewModel createReport(Report report) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
-                        "VALUES (:suspectId, :date::date, :location, :description, :timestampSubmitted::timestamp) RETURNING *")
+                        "VALUES (:suspectId, :date::date, :location, :description, :timestampSubmitted::timestamp) " +
+                        "RETURNING id, suspect_id, to_char(date_of_sighting, 'dd-mm-yyyy') as date_of_sighting, " +
+                        "location, description, to_char(timestamp_submitted, 'dd-mm-yyyy HH24:MI:SS') as timestamp_submitted")
                         .bind("suspectId", report.getSuspectId())
                         .bind("date", report.getDate())
                         .bind("location", report.getLocation())
