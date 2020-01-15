@@ -1,6 +1,7 @@
 package com.techswitch.ispy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techswitch.ispy.config.AppConfig;
 import com.techswitch.ispy.config.IntegrationTestConfig;
 import com.techswitch.ispy.models.Report;
 import org.jdbi.v3.core.Jdbi;
@@ -17,8 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("IntegrationTestConfig")
 @ContextConfiguration(classes = IntegrationTestConfig.class)
+@ActiveProfiles("testDataSource")
 public class ReportControllerTest {
 
     @Autowired

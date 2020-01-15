@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("IntegrationTestConfig")
+@ActiveProfiles("testDataSource")
 @ContextConfiguration(classes = IntegrationTestConfig.class)
 class SuspectsControllerServiceTest {
 
