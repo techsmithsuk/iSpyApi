@@ -74,11 +74,31 @@ public class ReportControllerTest {
     public void givenRequestWithEmptyDate_thenStatusBadRequest() throws Exception {
         Report report = new Report(1L, "", "London", "description");
         String requestJson = objectMapper.writeValueAsString(report);
-
+        System.err.println(requestJson);
         mockMvc.perform(post("http://localhost:8080/reports/create")
                 .contentType(APPLICATION_JSON)
                 .content(requestJson))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.date").value("Please use a DD-MM-YYYY format for date"));
+    }
+
+    @Test
+    public void givenRequestWithEmptySuspectId_thenStatusBadRequest() throws Exception {
+        String requestJson ="{\"suspectId\":\"\",\"date\":\"12-02-2019\",\"location\":\"London\",\"description\":\"description\"}";
+        mockMvc.perform(post("http://localhost:8080/reports/create")
+                .contentType(APPLICATION_JSON)
+                .content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.suspectId").value("Suspect ID cannot be null"));
+    }
+
+    @Test
+    public void givenRequestWithInvalidJson_thenInternalServerError() throws Exception {
+        String requestJson ="{\"suspectId\":}";
+        mockMvc.perform(post("http://localhost:8080/reports/create")
+                .contentType(APPLICATION_JSON)
+                .content(requestJson))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.Error").value("Internal Server Error"));
     }
 }
