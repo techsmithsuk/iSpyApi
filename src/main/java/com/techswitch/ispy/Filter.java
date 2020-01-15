@@ -3,8 +3,8 @@ package com.techswitch.ispy;
 
 public class Filter {
 
-    private Integer page;
-    private Integer pageSize;
+    private Integer page = 1;
+    private Integer pageSize = 10;
 
     public void setPage(Integer page) {
         this.page = page;

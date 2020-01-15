@@ -24,16 +24,13 @@ public class SuspectsController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @RequestMapping("/allsuspects/page={pageNumber}&page_size={pageSize}")
-    public List<Suspect> getSuspectList(@PathVariable("pageNumber") Integer pageNumber, @PathVariable("pageSize") Integer pageSize) {
-        Filter filter = new Filter();
-        filter.setPage(pageNumber);
-        filter.setPageSize(pageSize);
+    @RequestMapping("/suspects")
+    public List<Suspect> getSuspectList(Filter filter) {
         List<Suspect> suspectList = suspectsService.getAllSuspects(filter);
         return suspectList;
     }
 
-    @RequestMapping("/suspect")
+    @RequestMapping("/suspect_test")
     public String suspect() {
         return "{\"name\":\"BaddieMcBad\"}";
     }

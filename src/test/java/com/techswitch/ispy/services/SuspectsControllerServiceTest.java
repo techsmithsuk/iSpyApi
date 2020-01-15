@@ -28,25 +28,10 @@ class SuspectsControllerServiceTest {
     @Autowired
     private Jdbi jdbi;
 
-    @BeforeEach
-    void init() {
-        jdbi.withHandle(handle -> handle.execute("CREATE TABLE all_suspects (\n" +
-                " \tid serial  primary key, \n" +
-                " \tname varchar(100),\n" +
-                " \timage_url varchar(500)\n" +
-                " );"));
-        jdbi.withHandle(handle -> handle.execute("INSERT INTO all_suspects(name,image_url) values('Harry Potter','https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb');"));
-    }
-
-    @AfterEach
-    void dropTable() {
-        jdbi.withHandle(handle -> handle.execute("DROP TABLE all_suspects;"));
-    }
-
     @Test
     void getListOfSuspects() throws Exception {
 
-        mockMvc.perform(get("htttp://localhost/allsuspects/page=1&page_size=10"))
+        mockMvc.perform(get("htttp://localhost/suspects?page=1&pageSize=10"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("Harry Potter"))
                 .andExpect(jsonPath("[0].imageUrl").value("https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb"))
@@ -55,7 +40,7 @@ class SuspectsControllerServiceTest {
 
     @Test
     public void suspectController() throws Exception {
-        mockMvc.perform(get("http://localhost/suspect"))
+        mockMvc.perform(get("http://localhost/suspect_test"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("BaddieMcBad"))
                 .andReturn();
