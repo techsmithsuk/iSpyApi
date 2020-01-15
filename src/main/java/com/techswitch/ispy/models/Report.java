@@ -6,13 +6,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Report {
-    @NotNull
+    @NotNull (message = "Suspect ID cannot be null")
     private Long suspectId;
-    @ValidDate
+    @ValidDate (message = "Please use a DD-MM-YYYY format for date")
     private String date;
     private String location;
-    @NotNull
-    @NotEmpty
+    @NotNull (message = "Description cannot be empty")
+    @NotEmpty (message = "Description cannot be empty")
     private String description;
 
     public Report() {
