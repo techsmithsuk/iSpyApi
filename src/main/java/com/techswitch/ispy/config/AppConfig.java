@@ -31,14 +31,6 @@ public class AppConfig {
                 .build();
     }
 
-//    @Bean
-//    public DataSource getDataSource() {
-//        return DataSourceBuilder.create()
-//                .driverClassName("org.postgresql.Driver")
-//                .url(System.getenv("DATABASE_URL"))
-//                .build();
-//    }
-
     @Bean
     public Jdbi getJdbi(DataSource dataSource) {
         return Jdbi.create(dataSource);
