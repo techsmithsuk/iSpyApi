@@ -118,12 +118,18 @@
 			<groupId>com.opentable.components</groupId>
 			<artifactId>otj-pg-embedded</artifactId>
 			<version>0.13.3</version>
-
 		</dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.9.0</version>
+		</dependency>
 
     </dependencies>
 </project>
