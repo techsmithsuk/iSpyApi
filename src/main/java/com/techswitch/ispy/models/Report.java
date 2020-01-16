@@ -4,15 +4,20 @@ import com.techswitch.ispy.models.validator.ValidDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static com.techswitch.ispy.models.validator.DateValidator.DATE_FORMAT_INPUT;
 
 public class Report {
-    @NotNull (message = "Suspect ID cannot be null")
+    @NotNull(message = "Suspect ID cannot be null")
     private Long suspectId;
-    @ValidDate (message = "Please use a DD-MM-YYYY format for date")
+    @ValidDate(message = "Please use a DD-MM-YYYY format for date")
     private String date;
     private String location;
-    @NotNull (message = "Description cannot be empty")
-    @NotEmpty (message = "Description cannot be empty")
+    @NotNull(message = "Description cannot be empty")
+    @NotEmpty(message = "Description cannot be empty")
     private String description;
 
     public Report() {
@@ -55,5 +60,10 @@ public class Report {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date createSqlDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_INPUT);
+        return Date.valueOf(LocalDate.parse(date, formatter));
     }
 }

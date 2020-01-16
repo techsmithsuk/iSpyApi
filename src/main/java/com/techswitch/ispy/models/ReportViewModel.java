@@ -7,23 +7,6 @@ public class ReportViewModel {
     private String dateOfSighting;
     private String location;
     private String description;
-
-    public String getDateOfSighting() {
-        return dateOfSighting;
-    }
-
-    public void setDateOfSighting(String dateOfSighting) {
-        this.dateOfSighting = dateOfSighting;
-    }
-
-    public String getTimestampSubmitted() {
-        return timestampSubmitted;
-    }
-
-    public void setTimestampSubmitted(String timestampSubmitted) {
-        this.timestampSubmitted = timestampSubmitted;
-    }
-
     private String timestampSubmitted;
 
     public Long getId() {
@@ -42,6 +25,14 @@ public class ReportViewModel {
         this.suspectId = suspectId;
     }
 
+    public String getDateOfSighting() {
+        return dateOfSighting;
+    }
+
+    public void setDateOfSighting(String dateOfSighting) {
+        this.dateOfSighting = dateOfSighting;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -56,5 +47,13 @@ public class ReportViewModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTimestampSubmitted() {
+        return timestampSubmitted;
+    }
+
+    public void setTimestampSubmitted(String timestampSubmitted) {
+        this.timestampSubmitted = timestampSubmitted;
     }
 }
