@@ -1,4 +1,3 @@
-set datestyle to ISO, DMY;
 CREATE TABLE IF NOT EXISTS reports
 (
     date_of_sighting date,
