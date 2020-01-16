@@ -27,7 +27,7 @@ public class ReportController {
 
     @RequestMapping(value = "/create", method = POST, consumes = "application/json")
     public ResponseEntity createReport(@Valid @RequestBody Report report, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         reportService.createReport(report);

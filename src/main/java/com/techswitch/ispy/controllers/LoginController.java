@@ -2,6 +2,7 @@ package com.techswitch.ispy.controllers;
 
 import com.techswitch.ispy.models.LoginDetails;
 import com.techswitch.ispy.services.token_validation.TokenGenerator;
+import com.techswitch.ispy.services.token_validation.TokenValidator;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +15,9 @@ public class LoginController {
 
     @PostMapping("")
     public String validateLoginDetails(LoginDetails loginDetails) {
-
-        // does user have token
-
-        // if yes, check it,
-
-        // if okay arry on
-        // if no, show login-pop up
-
-        if (loginDetails.getUsername().equals("admin") && loginDetails.getPassword().equals("password")) {
+        if (loginDetails.getUsername().equals(System.getenv("ADMIN_USERNAME")) && loginDetails.getPassword().equals(System.getenv("ADMIN_PASSWORD"))) {
             return TokenGenerator.createToken();
         }
         return "invalid";
     }
-
 }
