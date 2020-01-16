@@ -29,7 +29,6 @@ public class AppConfig {
                 .password(password)
                 .url(dbUrl)
                 .build();
-        
     }
 
     @Bean
