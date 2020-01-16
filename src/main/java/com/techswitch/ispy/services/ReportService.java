@@ -1,5 +1,6 @@
 package com.techswitch.ispy.services;
 import com.techswitch.ispy.models.Report;
+import com.techswitch.ispy.models.ReportViewModel;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,19 @@ public class ReportService {
         this.jdbi = jdbi;
     }
 
-    public Long createReport(Report report) {
+    public ReportViewModel createReport(Report report) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
-                        "VALUES (:suspectId, :date::date, :location, :description, :timestampSubmitted::timestamp) RETURNING id")
+                        "VALUES (:suspectId, :date, :location, :description, :timestampSubmitted) " +
+                        "RETURNING id, suspect_id, to_char(date_of_sighting, 'dd-mm-yyyy') as date_of_sighting, location, " +
+                        "description, to_char(timestamp_submitted, 'dd-mm-yyyy  HH24:mm:ss') as timestamp_submitted")
                         .bind("suspectId", report.getSuspectId())
-                        .bind("date", report.getDate())
+                        .bind("date", report.createSqlDate())
                         .bind("location", report.getLocation())
                         .bind("description", report.getDescription())
                         .bind("timestampSubmitted", Timestamp.valueOf(LocalDateTime.now()))
-                        .mapTo(Long.class)
-                        .findOne()
-                        .get()
+                        .mapToBean(ReportViewModel.class)
+                        .first()
         );
     }
 }
