@@ -36,4 +36,15 @@ public class AppConfig {
         return Jdbi.create(dataSource);
     }
 
+
+    @Bean(name="adminUsername")
+    public String getAdminUsername(){
+        return System.getenv("ADMIN_USERNAME");
+    }
+
+    @Bean(name="adminPassword")
+    public String getAdminPassword(){
+        return System.getenv("ADMIN_PASSWORD");
+    }
+
 }
