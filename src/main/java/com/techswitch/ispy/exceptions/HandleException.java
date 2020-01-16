@@ -1,4 +1,4 @@
-package com.techswitch.ispy.models.validator;
+package com.techswitch.ispy.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

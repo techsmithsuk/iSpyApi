@@ -1,6 +1,6 @@
 package com.techswitch.ispy.services;
-import com.techswitch.ispy.models.Report;
-import com.techswitch.ispy.models.ReportViewModel;
+import com.techswitch.ispy.models.request.Report;
+import com.techswitch.ispy.models.database.ReportDatabaseModel;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class ReportService {
         this.jdbi = jdbi;
     }
 
-    public ReportViewModel createReport(Report report) {
+    public ReportDatabaseModel createReport(Report report) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
                         "VALUES (:suspectId, :date, :location, :description, :timestampSubmitted) " +
@@ -29,7 +29,7 @@ public class ReportService {
                         .bind("location", report.getLocation())
                         .bind("description", report.getDescription())
                         .bind("timestampSubmitted", Timestamp.valueOf(LocalDateTime.now()))
-                        .mapToBean(ReportViewModel.class)
+                        .mapToBean(ReportDatabaseModel.class)
                         .first()
         );
     }

@@ -2,8 +2,7 @@ package com.techswitch.ispy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.config.IntegrationTestConfig;
-import com.techswitch.ispy.models.Report;
-import com.techswitch.ispy.services.ReportService;
+import com.techswitch.ispy.models.request.Report;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,7 +29,7 @@ public class ReportControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void givenValidRequest_thenStatusIsCreated() throws Exception {
+    public void validRequest_createReport_thenStatusIsCreated() throws Exception {
         Report report = new Report(1L, "12-02-2019", "London", "description text");
         String requestJson = objectMapper.writeValueAsString(report);
 
@@ -48,7 +47,7 @@ public class ReportControllerTest {
     }
 
     @Test
-    public void givenRequestWithEmptyDescription_thenStatusBadRequest() throws Exception {
+    public void invalidRequest_createReport_returnsValidationError() throws Exception {
         Report report = new Report(1L, "12-02-2019", "London", "");
         String requestJson = objectMapper.writeValueAsString(report);
 
@@ -57,40 +56,6 @@ public class ReportControllerTest {
                 .content(requestJson))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.description").value("Description cannot be empty"));
-    }
-
-    @Test
-    public void givenRequestWithWrongDateFormat_thenStatusBadRequest() throws Exception {
-        Report report = new Report(1L, "12022019", "London", "description");
-        String requestJson = objectMapper.writeValueAsString(report);
-
-        mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.date").value("Please use a DD-MM-YYYY format for date"));
-    }
-
-    @Test
-    public void givenRequestWithEmptyDate_thenStatusBadRequest() throws Exception {
-        Report report = new Report(1L, "", "London", "description");
-        String requestJson = objectMapper.writeValueAsString(report);
-        System.err.println(requestJson);
-        mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.date").value("Please use a DD-MM-YYYY format for date"));
-    }
-
-    @Test
-    public void givenRequestWithEmptySuspectId_thenStatusBadRequest() throws Exception {
-        String requestJson ="{\"suspectId\":\"\",\"date\":\"12-02-2019\",\"location\":\"London\",\"description\":\"description\"}";
-        mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.suspectId").value("Suspect ID cannot be null"));
     }
 
     @Test
