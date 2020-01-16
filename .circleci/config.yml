@@ -38,7 +38,9 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
+      -run: |
+        RUN locale-gen en_UK.UTF-8
+        ENV LC_ALL en_UK.UTF-8
       # run tests!
       - run: mvn integration-test
 
