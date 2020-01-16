@@ -15,7 +15,7 @@ public class IntegrationTestConfig{
     @Bean
     @Profile("testDataSource")
     public DataSource getDataSource() throws IOException {
-        EmbeddedPostgres pg = EmbeddedPostgres.builder().setLocaleConfig("locale", "en_GB").start();
+        EmbeddedPostgres pg = EmbeddedPostgres.builder().start();
         return pg.getPostgresDatabase();
     }
 
