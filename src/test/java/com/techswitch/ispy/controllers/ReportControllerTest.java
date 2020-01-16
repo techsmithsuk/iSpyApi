@@ -98,7 +98,7 @@ public class ReportControllerTest {
         mockMvc.perform(post("http://localhost:8080/reports/create")
                 .contentType(APPLICATION_JSON)
                 .content(requestJson))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.Error").value("Internal Server Error"));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.Error").value("Bad Request"));
     }
 }
