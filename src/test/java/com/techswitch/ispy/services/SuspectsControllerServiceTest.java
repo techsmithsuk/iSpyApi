@@ -31,7 +31,7 @@ class SuspectsControllerServiceTest {
     @Test
     void getListOfSuspects() throws Exception {
 
-        mockMvc.perform(get("htttp://localhost/suspects?page=1&pageSize=10"))
+        mockMvc.perform(get("http://localhost/suspects?page=1&pageSize=10"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("Harry Potter"))
                 .andExpect(jsonPath("[0].imageUrl").value("https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb"))
@@ -39,11 +39,32 @@ class SuspectsControllerServiceTest {
     }
 
     @Test
-    public void suspectController() throws Exception {
-        mockMvc.perform(get("http://localhost/suspect_test"))
+    void getSuspectById_givenValidId_thenReturnSuspect() throws Exception {
+        int id = 532;
+        Long idFromDatabase = addFakeSuspect(id);
+        mockMvc.perform(get("http://localhost/suspects/" + idFromDatabase))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("BaddieMcBad"))
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value("Harry Potter"))
+                .andExpect(jsonPath("$.imageUrl").value("https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb"))
                 .andReturn();
     }
 
+    private Long addFakeSuspect(int id) {
+       return jdbi.withHandle(handle ->
+                handle.createQuery("INSERT INTO all_suspects (id, name, image_url) " +
+                        "VALUES (:id, 'Harry Potter', 'https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb') RETURNING id")
+                        .bind("id", id)
+                        .mapTo(Long.class)
+                        .one());
+    }
+
+    @Test
+    void getSuspectById_givenInvalidId_thenReturnBadRequest() throws Exception {
+        int id = 1234;
+        mockMvc.perform(get("http://localhost/suspects/" + id))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.Error").value("Suspect with id: " + id  + " not found"))
+                .andReturn();
+    }
 }

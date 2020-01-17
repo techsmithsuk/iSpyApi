@@ -1,10 +1,14 @@
 package com.techswitch.ispy;
 
-
 public class Filter {
 
-    private Integer page = 1;
-    private Integer pageSize = 10;
+    private Integer page;
+    private Integer pageSize;
+
+    public Filter() {
+        this.page = 1;
+        this.pageSize = 10;
+    }
 
     public void setPage(Integer page) {
         this.page = page;

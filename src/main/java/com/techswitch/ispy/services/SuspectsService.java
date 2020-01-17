@@ -1,12 +1,13 @@
 package com.techswitch.ispy.services;
 
 import com.techswitch.ispy.Filter;
-import com.techswitch.ispy.models.Suspect;
+import com.techswitch.ispy.models.database.SuspectDatabaseModel;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SuspectsService{
@@ -18,15 +19,18 @@ public class SuspectsService{
         this.jdbi = jdbi;
     }
 
-    public List<Suspect> getAllSuspects(Filter filter){
-        List<Suspect> allSuspects = jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects LIMIT :limit OFFSET :offset")
+    public List<SuspectDatabaseModel> getAllSuspects(Filter filter){
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects LIMIT :limit OFFSET :offset")
                 .bind("limit",filter.getPageSize())
                 .bind("offset",filter.getOffset())
-                .mapToBean(Suspect.class)
+                .mapToBean(SuspectDatabaseModel.class)
                 .list());
-        return allSuspects;
-
     }
 
-
+    public Optional<SuspectDatabaseModel> getSuspectById(int id) {
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects WHERE id = :id ")
+                .bind("id",id)
+                .mapToBean(SuspectDatabaseModel.class)
+                .findOne());
+    }
 }

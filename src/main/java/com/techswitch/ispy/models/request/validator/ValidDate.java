@@ -1,4 +1,4 @@
-package com.techswitch.ispy.models.validator;
+package com.techswitch.ispy.models.request.validator;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
