@@ -1,6 +1,6 @@
-package com.techswitch.ispy.models;
+package com.techswitch.ispy.models.request;
 
-import com.techswitch.ispy.models.validator.ValidDate;
+import com.techswitch.ispy.models.request.validator.ValidDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.techswitch.ispy.models.validator.DateValidator.DATE_FORMAT_INPUT;
+import static com.techswitch.ispy.models.request.validator.DateValidator.DATE_FORMAT_INPUT;
 
 public class Report {
     @NotNull(message = "Suspect ID cannot be null")
@@ -16,7 +16,6 @@ public class Report {
     @ValidDate(message = "Please use a DD-MM-YYYY format for date")
     private String date;
     private String location;
-    @NotNull(message = "Description cannot be empty")
     @NotEmpty(message = "Description cannot be empty")
     private String description;
 

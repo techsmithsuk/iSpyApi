@@ -1,7 +1,7 @@
 package com.techswitch.ispy.controllers;
 
-import com.techswitch.ispy.models.Report;
-import com.techswitch.ispy.models.ReportViewModel;
+import com.techswitch.ispy.models.request.Report;
+import com.techswitch.ispy.models.database.ReportDatabaseModel;
 import com.techswitch.ispy.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +25,7 @@ public class ReportController {
 
     @RequestMapping(value = "/create", method = POST, consumes = "application/json")
     @ResponseBody
-    public ReportViewModel createReport(@Valid @RequestBody Report report) {
+    public ReportDatabaseModel createReport(@Valid @RequestBody Report report) {
         return reportService.createReport(report);
     }
 }

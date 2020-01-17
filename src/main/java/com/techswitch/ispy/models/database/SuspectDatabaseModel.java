@@ -1,6 +1,6 @@
-package com.techswitch.ispy.models;
+package com.techswitch.ispy.models.database;
 
-public class Suspect {
+public class SuspectDatabaseModel {
 
     private Integer id;
     private String name;

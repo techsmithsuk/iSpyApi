@@ -1,11 +1,10 @@
 package com.techswitch.ispy.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.Filter;
-import com.techswitch.ispy.models.Suspect;
+import com.techswitch.ispy.models.database.SuspectDatabaseModel;
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +24,8 @@ public class SuspectsController {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping("/suspects")
-    public List<Suspect> getSuspectList(Filter filter) {
-        List<Suspect> suspectList = suspectsService.getAllSuspects(filter);
+    public List<SuspectDatabaseModel> getSuspectList(Filter filter) {
+        List<SuspectDatabaseModel> suspectList = suspectsService.getAllSuspects(filter);
         return suspectList;
     }
 

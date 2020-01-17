@@ -1,6 +1,6 @@
-package com.techswitch.ispy.models;
+package com.techswitch.ispy.models.database;
 
-public class ReportViewModel {
+public class ReportDatabaseModel {
 
     private Long id;
     private Long suspectId;
