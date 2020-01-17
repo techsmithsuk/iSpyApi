@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.techswitch.ispy.models.request.validator.DateValidator.DATE_FORMAT_INPUT;
 
-public class Report {
+public class ReportRequestModel {
     @NotNull(message = "Suspect ID cannot be null")
     private Long suspectId;
     @ValidDate(message = "Please use a DD-MM-YYYY format for date")
@@ -19,10 +19,10 @@ public class Report {
     @NotEmpty(message = "Description cannot be empty")
     private String description;
 
-    public Report() {
+    public ReportRequestModel() {
     }
 
-    public Report(Long suspectId, String date, String location, String description) {
+    public ReportRequestModel(Long suspectId, String date, String location, String description) {
         this.suspectId = suspectId;
         this.date = date;
         this.location = location;

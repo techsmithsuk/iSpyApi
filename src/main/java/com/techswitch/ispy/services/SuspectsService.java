@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SuspectsService{
@@ -24,5 +25,12 @@ public class SuspectsService{
                 .bind("offset",filter.getOffset())
                 .mapToBean(SuspectDatabaseModel.class)
                 .list());
+    }
+
+    public Optional<SuspectDatabaseModel> getSuspectById(int id) {
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects WHERE id = :id ")
+                .bind("id",id)
+                .mapToBean(SuspectDatabaseModel.class)
+                .findOne());
     }
 }
