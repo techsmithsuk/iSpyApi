@@ -1,7 +1,7 @@
 package com.techswitch.ispy.controllers;
 
 import com.techswitch.ispy.models.LoginDetails;
-import com.techswitch.ispy.services.token_validation.TokenGenerator;
+import com.techswitch.ispy.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -13,21 +13,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class LoginController {
 
-    private String adminUsername;
-    private String adminPassword;
+    private LoginService loginService;
 
     @Autowired
-    public LoginController(@Qualifier("adminUsername") String adminUsername, @Qualifier("adminPassword") String adminPassword) {
-        this.adminUsername = adminUsername;
-        this.adminPassword = adminPassword;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity validateLoginDetails(LoginDetails loginDetails) {
-        if (loginDetails.getUsername().equals(adminUsername) && loginDetails.getPassword().equals(adminPassword)) {
+    @PostMapping()
+    public ResponseEntity validateLoginDetails(@ModelAttribute LoginDetails loginDetails) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(TokenGenerator.createToken());
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        return loginService.validateLogin(loginDetails) ?
+                ResponseEntity.status(HttpStatus.OK).body(loginService.getToken()) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }

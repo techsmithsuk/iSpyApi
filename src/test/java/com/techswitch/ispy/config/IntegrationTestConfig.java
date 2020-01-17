@@ -29,4 +29,19 @@ public class IntegrationTestConfig{
             throw new Exception();
         }
     }
+
+    @Bean(name="signer")
+    @Profile("testSigner")
+    public String getSigner(){
+        return "signerstring";
+    }
+
+    @Bean
+    @Profile("testLoginConfig")
+    public LoginConfig getLoginConfig() {
+        return new LoginConfig(
+                "username",
+                "password"
+        );
+    }
 }

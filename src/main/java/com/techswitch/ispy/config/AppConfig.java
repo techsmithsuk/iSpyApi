@@ -37,11 +37,13 @@ public class AppConfig {
     }
 
     @Bean(name="signer")
+    @Profile("productionSigner")
     public String getSigner(){
         return System.getenv("SIGNER");
     }
 
     @Bean
+    @Profile("productionLoginConfig")
     public LoginConfig getLoginConfig() {
         return new LoginConfig(
                 System.getenv("ADMIN_USERNAME"),

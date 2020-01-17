@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = IntegrationTestConfig.class)
-@ActiveProfiles("testDataSource")
+@ActiveProfiles({"testDataSource","testSigner","testLoginConfig"})
 public class InternalServerErrorTest {
 
 
