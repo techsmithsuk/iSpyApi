@@ -1,12 +1,14 @@
 package com.techswitch.ispy.services;
-import com.techswitch.ispy.models.request.Report;
-import com.techswitch.ispy.models.database.ReportDatabaseModel;
+import com.techswitch.ispy.Filter;
+import com.techswitch.ispy.models.Report;
+import com.techswitch.ispy.models.ReportViewModel;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ReportService {
@@ -32,5 +34,14 @@ public class ReportService {
                         .mapToBean(ReportDatabaseModel.class)
                         .first()
         );
+    }
+
+    public List<ReportViewModel> getAllReports(Filter filter){
+        List<ReportViewModel> allReports = jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM reports LIMIT :limit OFFSET :offset")
+                .bind("limit",filter.getPageSize())
+                .bind("offset",filter.getOffset())
+                .mapToBean(ReportViewModel.class)
+                .list());
+        return allReports;
     }
 }
