@@ -4,13 +4,15 @@ import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.database.SuspectDatabaseModel;
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "/suspects")
 @CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-staging.herokuapp.com", "https://techswitch-i-spy.herokuapp.com"})
 public class SuspectsController {
 
@@ -23,14 +25,20 @@ public class SuspectsController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @RequestMapping("/suspects")
+    @RequestMapping()
     public List<SuspectDatabaseModel> getSuspectList(Filter filter) {
         List<SuspectDatabaseModel> suspectList = suspectsService.getAllSuspects(filter);
         return suspectList;
     }
 
-    @RequestMapping("/suspect_test")
-    public String suspect() {
-        return "{\"name\":\"BaddieMcBad\"}";
+    @RequestMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity getSuspectById(@PathVariable int id){
+        Optional<SuspectDatabaseModel> suspectFromDatabase = suspectsService.getSuspectById(id);
+        if(suspectFromDatabase.isPresent()){
+            return ResponseEntity.ok().body(suspectFromDatabase);
+        }
+        return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Suspect with id: " + id + " not found"));
     }
 }
+
