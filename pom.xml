@@ -39,10 +39,10 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>reportRequestModel</id>
+						<id>report</id>
 						<phase>test</phase>
 						<goals>
-							<goal>reportRequestModel</goal>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
