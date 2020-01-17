@@ -2,7 +2,9 @@ package com.techswitch.ispy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.config.IntegrationTestConfig;
-import com.techswitch.ispy.models.request.Report;
+import com.techswitch.ispy.models.request.ReportRequestModel;
+import com.techswitch.ispy.services.ReportService;
+import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,22 +13,18 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = IntegrationTestConfig.class)
 @ActiveProfiles("testDataSource")
-public class ReportControllerTest {
+public class ReportRequestModelControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -42,8 +40,8 @@ public class ReportControllerTest {
 
     @Test
     public void validRequest_createReport_thenStatusIsCreated() throws Exception {
-        Report report = new Report(1L, "12-02-2019", "London", "description text");
-        String requestJson = objectMapper.writeValueAsString(report);
+        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "12-02-2019", "London", "description text");
+        String requestJson = objectMapper.writeValueAsString(reportRequestModel);
 
         mockMvc.perform(post("http://localhost:8080/reports/create")
                 .contentType(APPLICATION_JSON)
@@ -60,8 +58,8 @@ public class ReportControllerTest {
 
     @Test
     public void invalidRequest_createReport_returnsValidationError() throws Exception {
-        Report report = new Report(1L, "12-02-2019", "London", "");
-        String requestJson = objectMapper.writeValueAsString(report);
+        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "12-02-2019", "London", "");
+        String requestJson = objectMapper.writeValueAsString(reportRequestModel);
 
         mockMvc.perform(post("http://localhost:8080/reports/create")
                 .contentType(APPLICATION_JSON)
