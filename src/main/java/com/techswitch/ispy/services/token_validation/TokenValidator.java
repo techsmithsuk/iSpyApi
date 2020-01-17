@@ -4,13 +4,24 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TokenValidator {
 
-    public static boolean validateToken(String token) {
+    private String signer;
+
+    @Autowired
+    public TokenValidator(@Qualifier("signer") String signer) {
+        this.signer = signer;
+    }
+
+    public boolean validateToken(String token) {
 
         try {
-            Algorithm algorithm = Algorithm.HMAC256(System.getenv("SIGNER"));
+            Algorithm algorithm = Algorithm.HMAC256(signer);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("techswitch-ispy")
                     .build(); //Reusable verifier instance
