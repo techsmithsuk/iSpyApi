@@ -1,5 +1,6 @@
 package com.techswitch.ispy.config;
 
+
 public class LoginConfig {
     private String adminUsername;
     private String adminPassword;

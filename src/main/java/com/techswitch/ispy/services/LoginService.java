@@ -2,11 +2,14 @@ package com.techswitch.ispy.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.techswitch.ispy.config.AppConfig;
 import com.techswitch.ispy.config.LoginConfig;
 import com.techswitch.ispy.models.LoginDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Date;
 
