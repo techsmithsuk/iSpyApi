@@ -10,6 +10,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -66,5 +68,13 @@ class SuspectsControllerServiceTest {
                 .andDo(print()).andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.Error").value("Suspect with id: " + id  + " not found"))
                 .andReturn();
+    }
+
+    @Test
+    void replaceTags(){
+        String textWithTags = "<p>hewrldgfsklfjghdflg</p>";
+        String str = textWithTags.replaceAll("<.*?>", "");
+        assertFalse(str.contains("<p>"));
+        assertFalse(str.contains("</p>"));
     }
 }

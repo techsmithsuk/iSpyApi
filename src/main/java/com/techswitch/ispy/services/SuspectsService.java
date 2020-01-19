@@ -20,7 +20,7 @@ public class SuspectsService{
     }
 
     public List<SuspectDatabaseModel> getAllSuspects(Filter filter){
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects LIMIT :limit OFFSET :offset")
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM suspects LIMIT :limit OFFSET :offset")
                 .bind("limit",filter.getPageSize())
                 .bind("offset",filter.getOffset())
                 .mapToBean(SuspectDatabaseModel.class)
@@ -28,7 +28,7 @@ public class SuspectsService{
     }
 
     public Optional<SuspectDatabaseModel> getSuspectById(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM all_suspects WHERE id = :id ")
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM suspects WHERE id = :id ")
                 .bind("id",id)
                 .mapToBean(SuspectDatabaseModel.class)
                 .findOne());

@@ -8,14 +8,13 @@ public class SuspectDatabaseModel {
     private String rewardText;
     private String hair;
     private String datesOfBirthUsed;
-    private String cautionMessage;
     private String nationality;
     private String aliases;
     private String race;
     private String fbiPublicationTimestamp;
     private String name;
     private String eyes;
-    private String description;
+    private String details;
     private String sex;
     private String fbiSuspectUrl;
     private String lastModifiedTimestamp;
@@ -23,7 +22,16 @@ public class SuspectDatabaseModel {
     private String warningMessage;
     private String fbiJsonUrl;
     private String imageUrl;
+    private String fbiJsonId;
 
+
+    public String getFbiJsonId() {
+        return fbiJsonId;
+    }
+
+    public void setFbiJsonId(String fbiJsonId) {
+        this.fbiJsonId = fbiJsonId;
+    }
 
     public Long getId() {
         return id;
@@ -71,14 +79,6 @@ public class SuspectDatabaseModel {
 
     public void setDatesOfBirthUsed(String datesOfBirthUsed) {
         this.datesOfBirthUsed = datesOfBirthUsed;
-    }
-
-    public String getCautionMessage() {
-        return cautionMessage;
-    }
-
-    public void setCautionMessage(String cautionMessage) {
-        this.cautionMessage = cautionMessage;
     }
 
     public String getNationality() {
@@ -129,12 +129,12 @@ public class SuspectDatabaseModel {
         this.eyes = eyes;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getSex() {

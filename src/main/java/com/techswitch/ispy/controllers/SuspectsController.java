@@ -1,5 +1,4 @@
 package com.techswitch.ispy.controllers;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.database.SuspectDatabaseModel;
 import com.techswitch.ispy.services.SuspectsService;
@@ -22,8 +21,6 @@ public class SuspectsController {
     public SuspectsController(SuspectsService suspectsService) {
         this.suspectsService = suspectsService;
     }
-
-    ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping()
     public List<SuspectDatabaseModel> getSuspectList(Filter filter) {

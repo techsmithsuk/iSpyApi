@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 @RestController
 public class FbiDataController {
@@ -24,7 +25,7 @@ public class FbiDataController {
     }
 
     @RequestMapping(value = "/admin/fetch-fbi-data")
-    public ResponseEntity fetchFbiData() throws IOException {
+    public ResponseEntity fetchFbiData() throws IOException, ParseException {
         int currentPage = 1;
         JsonNode items = getJsonFromUrl(FBI_URL + currentPage);
 
@@ -39,7 +40,6 @@ public class FbiDataController {
         ObjectMapper mapper = new ObjectMapper();
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(fbiApiUrl, String.class);
-        JsonNode items = mapper.readTree(response.getBody()).get("items");
-        return items;
+        return mapper.readTree(response.getBody()).get("items");
     }
 }
