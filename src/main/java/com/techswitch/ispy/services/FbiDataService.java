@@ -28,8 +28,9 @@ public class FbiDataService {
         this.jdbi = jdbi;
     }
 
-    public void saveDataToDatabase(JsonNode items) throws ParseException {
+    public Integer saveDataToDatabase(JsonNode items) throws ParseException {
         Long suspectId = null;
+        Integer rowsOfSuspectsInserted = 0;
         for (JsonNode node : items) {
             try (Handle handle = jdbi.open()) {
 
@@ -59,6 +60,7 @@ public class FbiDataService {
                             .bind("fbiJsonId", node.path("uid").textValue())
                             .mapTo(Long.class)
                             .one();
+                    rowsOfSuspectsInserted++;
                 }
 
                 if(suspectByFbiJsonId.isPresent()){
@@ -78,7 +80,10 @@ public class FbiDataService {
                 }
             }
         }
+        return rowsOfSuspectsInserted;
     }
+
+
 
     private Optional<Long> getSuspectByFbiId(JsonNode node, Handle handle) {
         return handle.createQuery("SELECT id FROM suspects WHERE fbi_json_id = :fbiJsonId;")

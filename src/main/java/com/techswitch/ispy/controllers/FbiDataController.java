@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Collections;
 
 @RestController
 public class FbiDataController {
@@ -27,13 +28,17 @@ public class FbiDataController {
     @RequestMapping(value = "/admin/fetch-fbi-data")
     public ResponseEntity fetchFbiData() throws IOException, ParseException {
         int currentPage = 1;
+        int rowsOfSuspectsAdded = 0;
         JsonNode items = getJsonFromUrl(FBI_URL + currentPage);
 
-        while (items.size() > 0){
-            fbiDataService.saveDataToDatabase(items);
+        while (items.size() > 0) {
+            rowsOfSuspectsAdded += fbiDataService.saveDataToDatabase(items);
             items = getJsonFromUrl(FBI_URL + (++currentPage));
         }
-        return ResponseEntity.ok().build();
+        if (rowsOfSuspectsAdded == 0) {
+            return ResponseEntity.ok().body(Collections.singletonMap("Success", "No data has been added. Database Up to date."));
+        }
+            return ResponseEntity.ok().body(Collections.singletonMap("Success", rowsOfSuspectsAdded + " rows has been added to database."));
     }
 
     private JsonNode getJsonFromUrl(String fbiApiUrl) throws IOException {
