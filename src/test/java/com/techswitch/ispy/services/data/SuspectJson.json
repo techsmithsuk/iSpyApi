@@ -1,0 +1,92 @@
+[
+    {
+      "person_classification": "Main",
+      "locations": null,
+      "aliases": [
+        "Jerrell Abrams",
+        "Juvon Searles",
+        "Juvon J. Searles",
+        "Juvon Jullian Searles",
+        "Jovan Julian Searles",
+        "Jovan Searles",
+        "Jovon Searles",
+        "Jovon Julan Searles",
+        "Jovon Julian Searles",
+        "Jovon Jullian Searles",
+        "Juvon Julian Serles",
+        "Jovan Serles",
+        "Jovon Julian Serles"
+      ],
+      "details": null,
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "possible_states": null,
+      "reward_text": "The FBI is offering a reward of up to $10,000 for information leading to the arrest of Juvon Julian Searles.  Additional reward money may be available.",
+      "additional_information": null,
+      "hair_raw": "Black",
+      "reward_min": 0,
+      "title": "JUVON JULIAN SEARLES",
+      "legat_names": null,
+      "complexion": null,
+      "modified": "2020-01-17T19:32:50+00:00",
+      "images": [
+        {
+          "thumb": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image/thumb",
+          "large": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image/large",
+          "caption": null,
+          "original": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image"
+        }
+      ],
+      "publication": "2019-12-12T08:24:00",
+      "subjects": [
+        "Law Enforcement Assistance"
+      ],
+      "build": null,
+      "remarks": null,
+      "reward_max": 0,
+      "height_max": 73,
+      "suspects": null,
+      "race": "black",
+      "dates_of_birth_used": [
+        "October 9, 1980",
+        "October 9, 1981",
+        "October 19, 1980",
+        "June 11, 1985"
+      ],
+      "eyes_raw": "Brown",
+      "sex": "Male",
+      "uid": "1aa0a21720cb42678a32087c3c8fc3db",
+      "caution": "<p>The FBI's Washington Field Office is assisting the Metropolitan Police Department (MPD) in Washington, D.C. and the US Marshals Service Capital Area Task Force with their search for Juvon Julian Searles.  On Tuesday, July 24, 2018, at approximately 8:16 p.m., the MPD responded to a report of gunshots at the 800 Block of R Street, Northwest, Washington, D.C., where they located a male victim suffering from multiple gunshot wounds. The victim was transported to an area hospital for treatment of life-threatening injuries and was pronounced dead shortly thereafter.  On December 4, 2018, Searles was charged in the Superior Court of the District of Columbia with Second Degree Murder While Armed and a warrant was issued for his arrest.</p>\r\n<p> </p>",
+      "hair": "black",
+      "occupations": null,
+      "languages": null,
+      "nationality": "American",
+      "path": "/wanted/law-enforcement-assistance/juvon-julian-searles",
+      "possible_countries": null,
+      "field_offices": [
+        "washingtondc"
+      ],
+      "weight_min": 260,
+      "status": "na",
+      "age_min": null,
+      "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles",
+      "files": [
+        {
+          "name": "English",
+          "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/download.pdf"
+        }
+      ],
+      "place_of_birth": "Washington, D.C.",
+      "weight_max": 280,
+      "age_max": null,
+      "coordinates": [],
+      "ncic": null,
+      "eyes": "brown",
+      "weight": "260 to 280 pounds",
+      "age_range": null,
+      "scars_and_marks": "Searles has scars on his head and chest.  He has tattoos on his chest, abdomen, left and right arms, and left and right forearms.",
+      "race_raw": "Black",
+      "height_min": 69,
+      "description": "Second Degree Murder While Armed",
+      "@id": "https://api.fbi.gov/@wanted-person/1aa0a21720cb42678a32087c3c8fc3db"
+    }
+  ]

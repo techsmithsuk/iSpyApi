@@ -83,8 +83,6 @@ public class FbiDataService {
         return rowsOfSuspectsInserted;
     }
 
-
-
     private Optional<Long> getSuspectByFbiId(JsonNode node, Handle handle) {
         return handle.createQuery("SELECT id FROM suspects WHERE fbi_json_id = :fbiJsonId;")
                 .bind("fbiJsonId",node.path("uid").textValue())

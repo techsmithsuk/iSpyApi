@@ -38,7 +38,7 @@ public class FbiDataController {
         if (rowsOfSuspectsAdded == 0) {
             return ResponseEntity.ok().body(Collections.singletonMap("Success", "No data has been added. Database Up to date."));
         }
-            return ResponseEntity.ok().body(Collections.singletonMap("Success", rowsOfSuspectsAdded + " rows has been added to database."));
+            return ResponseEntity.ok().body(Collections.singletonMap("Success", rowsOfSuspectsAdded + " row(s) has been added to database."));
     }
 
     private JsonNode getJsonFromUrl(String fbiApiUrl) throws IOException {
