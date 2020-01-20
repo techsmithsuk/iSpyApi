@@ -1,35 +1,32 @@
 CREATE TABLE if not exists suspects
 (
-    id                        serial primary key,
-    poster_url                varchar(200),
-    weight                    varchar(300),
-    reward_text               varchar(2000),
-    hair                      varchar(300),
-    dates_of_birth_used       varchar(1000),
-    nationality               varchar(200),
-    aliases                   varchar(2000),
-    race                      varchar(150),
-    fbi_publication_timestamp timestamp,
-    name                      varchar(300),
-    eyes                      varchar(300),
-    details                   varchar(15000),
-    sex                       varchar(10),
-    fbi_suspect_url           varchar(300),
-    last_modified_timestamp   timestamp,
-    height_min                varchar(30),
-    warning_message           varchar(3000),
-    fbi_json_url              varchar(300),
-    image_url                 varchar(300),
-    fbi_json_id               varchar(300)
+    id                  serial primary key,
+    dates_of_birth_used varchar(1000),
+    hair                varchar(300),
+    eyes                varchar(300),
+    height_min          varchar(30),
+    height_max          varchar(30),
+    weight              varchar(300),
+    sex                 varchar(10),
+    race                varchar(150),
+    nationality         varchar(200),
+    scars_and_marks     varchar(5000),
+    reward_text         varchar(2000),
+    caution             varchar(15000),
+    details             varchar(15000),
+    warning_message     varchar(3000),
+    uid                 varchar(300) unique ,
+    modified            timestamp,
+    publication         timestamp
 );
 
 CREATE TABLE IF NOT EXISTS reports
 (
     id                  serial primary key,
     date_of_sighting    date,
-    description         character varying(2000)     NOT NULL,
+    description         character varying(2000) NOT NULL,
     location            character varying(200),
-    suspect_id          integer                     NOT NULL,
+    suspect_id          integer                 NOT NULL,
     timestamp_submitted timestamp without time zone NOT NULL
 );
 
