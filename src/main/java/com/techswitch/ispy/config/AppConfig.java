@@ -29,12 +29,26 @@ public class AppConfig {
                 .password(password)
                 .url(dbUrl)
                 .build();
-
     }
 
     @Bean
     public Jdbi getJdbi(DataSource dataSource) {
         return Jdbi.create(dataSource);
+    }
+
+    @Bean(name="signer")
+    @Profile("productionSigner")
+    public String getSigner(){
+        return System.getenv("SIGNER");
+    }
+
+    @Bean
+    @Profile("productionLoginConfig")
+    public LoginConfig getLoginConfig() {
+        return new LoginConfig(
+                System.getenv("ADMIN_USERNAME"),
+                System.getenv("ADMIN_PASSWORD")
+        );
     }
 
 }
