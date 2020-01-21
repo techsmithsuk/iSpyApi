@@ -4,7 +4,7 @@ public class SuspectDatabaseModel {
 
     private Long id;
     private String title;
-    private String datesOfBirth;
+    private String dateOfBirth;
     private String hair;
     private String eyes;
     private Integer height;
@@ -38,12 +38,13 @@ public class SuspectDatabaseModel {
         this.title = title;
     }
 
-    public String getDatesOfBirth() {
-        return datesOfBirth;
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDatesOfBirth(String datesOfBirth) {
-        this.datesOfBirth = datesOfBirth;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getHair() {

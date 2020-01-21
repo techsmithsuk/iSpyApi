@@ -10,6 +10,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -44,7 +47,7 @@ class SuspectsControllerServiceTest {
     private Long addFakeSuspect(int id, String uid) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO suspects (id, title, date_of_birth, hair, eyes, height, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, warning_message, fbi_uid, modified, publication) " +
-                        "VALUES (:id, 'JUVON JULIAN SEARLES', 'October 9, 1980', 'black', 'brown','69', '260 to 280 pounds', 'Male', 'black', 'American', 'Searles has scars on his head and chest.','£10000', 'Dangerous', null, 'SHOULD BE CONSIDERED ARMED AND DANGEROUS', :uid, '2020-01-17 19:32:50.000000', '2019-01-12 08:24:00.000000') RETURNING id;")
+                        "VALUES (:id, 'JUVON JULIAN SEARLES', 'October 9, 1980', 'black', 'brown','69', '260 to 280 pounds', 'Male', 'black', 'American', 'Searles has scars on his head and chest.','£10000', 'Dangerous', 'Missing person', 'SHOULD BE CONSIDERED ARMED AND DANGEROUS', :uid, '2020-01-17 19:32:50.000000', '2019-01-12 08:24:00.000000') RETURNING id;")
                         .bind("id", id)
                         .bind("uid", uid)
                         .mapTo(Long.class)
@@ -64,6 +67,8 @@ class SuspectsControllerServiceTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].fbiUid").value("IamAbigBouy"))
                 .andExpect(jsonPath("[1].fbiUid").value("thisisAtest"))
+                .andExpect(jsonPath("[1].dateOfBirth").value("October 9, 1980"))
+
                 .andReturn();
     }
 
