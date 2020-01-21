@@ -1,6 +1,8 @@
 package com.techswitch.ispy.services;
 
 import com.techswitch.ispy.config.IntegrationTestConfig;
+import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
+import net.bytebuddy.asm.Advice;
 import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -31,6 +36,7 @@ class SuspectsControllerServiceTest {
 
     @Autowired
     private Jdbi jdbi;
+
 
     @BeforeEach
     private void createSuspects() {
@@ -58,6 +64,18 @@ class SuspectsControllerServiceTest {
         jdbi.withHandle(handle -> handle.createUpdate("DELETE FROM suspects WHERE id = :id")
                 .bind("id", id)
                 .execute());
+    }
+
+    @Test
+    public void addSuspect_givenExistentSuspectInDatabase_thenReturnZeroSuspectsAdded() throws ParseException {
+        SuspectFbiRequestModel suspect = new SuspectFbiRequestModel();
+        SuspectsService suspectsService = new SuspectsService(jdbi);
+        suspect.setUid("testSameSuspect");
+        suspect.setModified("2012-06-06T11:00:00");
+        suspect.setPublication("2012-06-05T11:00:00");
+        suspect.setImages(new ArrayList<>());
+        suspectsService.addSuspect(suspect);
+        assertThat(suspectsService.addSuspect(suspect)).isEqualTo(0);
     }
 
     @Test
@@ -98,4 +116,5 @@ class SuspectsControllerServiceTest {
         assertFalse(str.contains("<p>"));
         assertFalse(str.contains("</p>"));
     }
+
 }
