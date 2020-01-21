@@ -37,7 +37,7 @@ public class SuspectFbiRequestModelTest {
 
         assertThatThrownBy(() -> {
             suspect.formatTimestamp("200-01-1");
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(ParseException.class);
 
     }
 }

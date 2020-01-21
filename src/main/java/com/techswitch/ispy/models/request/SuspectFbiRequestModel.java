@@ -190,16 +190,8 @@ public class SuspectFbiRequestModel {
     }
 
     public Timestamp formatTimestamp(String timestamp) throws ParseException {
-        SimpleDateFormat formatterWithoutTimezone = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss");
-        Date parsedTimestamp = null;
-
-        try {
-            parsedTimestamp = formatterWithoutTimezone.parse(timestamp);
-
-        } catch (ParseException e) {
-            SimpleDateFormat formatterWithTimeZone = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ssTZD");
-            parsedTimestamp = formatterWithTimeZone.parse(timestamp);
-        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss");
+        Date parsedTimestamp = formatter.parse(timestamp);
         return new Timestamp(parsedTimestamp.getTime());
     }
 
