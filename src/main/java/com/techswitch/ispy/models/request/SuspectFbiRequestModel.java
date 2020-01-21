@@ -181,7 +181,7 @@ public class SuspectFbiRequestModel {
         this.warningMessage = warningMessage;
     }
 
-    private String getTextWithoutTags(String text){
+    private String getTextWithoutTags(String text) {
         if (text != null) {
             text = text.replaceAll("<[^>]+>", "");
             text = text.replaceAll("\r\n", "");
@@ -189,21 +189,22 @@ public class SuspectFbiRequestModel {
         return text;
     }
 
-    private Timestamp formatTimestamp(String timestamp) throws ParseException {
-        SimpleDateFormat datetimeFormatter = new SimpleDateFormat(
-                "yyyy-mm-dd'T'hh:mm:ssZ");
+    public Timestamp formatTimestamp(String timestamp) throws ParseException {
+        SimpleDateFormat formatterWithoutTimezone = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss");
         Date parsedTimestamp = null;
+
         try {
-            parsedTimestamp = datetimeFormatter.parse(timestamp);
+            parsedTimestamp = formatterWithoutTimezone.parse(timestamp);
+
         } catch (ParseException e) {
-            datetimeFormatter = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss");
-            parsedTimestamp = datetimeFormatter.parse(timestamp);
+            SimpleDateFormat formatterWithTimeZone = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ssTZD");
+            parsedTimestamp = formatterWithTimeZone.parse(timestamp);
         }
         return new Timestamp(parsedTimestamp.getTime());
     }
 
-    public String getDatesOfBirthUsedAsSingleString(){
-        if(datesOfBirthUsed == null){
+    public String getDatesOfBirthUsedAsSingleString() {
+        if (datesOfBirthUsed == null) {
             return null;
         }
         return datesOfBirthUsed.get(0);
