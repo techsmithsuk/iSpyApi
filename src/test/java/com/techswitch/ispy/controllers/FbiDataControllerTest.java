@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,5 +52,14 @@ public class FbiDataControllerTest {
         mockMvc.perform(get("http://localhost:8080/admin/fetch-fbi-data"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.Success").value("1 row(s) has been added to database."));
+    }
+
+    @Test
+    public void fetchFbiData_givenValidJson_thenReturnStatusOkNoneAdded() throws Exception {
+        when(fbiDataService.getSuspectsFromFbiApi()).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(get("http://localhost:8080/admin/fetch-fbi-data"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.Success").value("No data has been added. Database Up to date."));
     }
 }
