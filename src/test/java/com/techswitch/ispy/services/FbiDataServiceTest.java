@@ -24,7 +24,6 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = IntegrationTestConfig.class)
 public class FbiDataServiceTest {
 
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -61,7 +60,4 @@ public class FbiDataServiceTest {
         assertTrue(suspectsFromFbiApi.get(1).getUid().equals("2611092a-4356-46c3-a573-5081ee8771bf"));
     }
 }
-
-
-
 

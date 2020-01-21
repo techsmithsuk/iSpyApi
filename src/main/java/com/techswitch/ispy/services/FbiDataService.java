@@ -3,6 +3,8 @@ package com.techswitch.ispy.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,14 +16,16 @@ import java.util.*;
 @Service
 public class FbiDataService {
 
+    RestTemplate restTemplate = new RestTemplate();
+    ObjectMapper mapper = new ObjectMapper();
+
     public List<SuspectFbiRequestModel> getSuspectsFromFbiApi() throws IOException {
         int currentPage = 1;
         List<SuspectFbiRequestModel> suspects = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
         JsonNode items = getJsonFromUrl(getFbiApiUrl(currentPage), "items");
         while (items.size() > 0) {
             for (JsonNode node : items) {
-                suspects.add(objectMapper.readValue(node.toString(), SuspectFbiRequestModel.class));
+                suspects.add(mapper.readValue(node.toString(), SuspectFbiRequestModel.class));
             }
             items = getJsonFromUrl(getFbiApiUrl(++currentPage), "items");
         }
@@ -29,8 +33,7 @@ public class FbiDataService {
     }
 
     public JsonNode getJsonFromUrl(String fbiApiUrl, String objectNameInJson) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        RestTemplate restTemplate = new RestTemplate();
+
         ResponseEntity<String> response = restTemplate.getForEntity(fbiApiUrl, String.class);
         return mapper.readTree(response.getBody()).get(objectNameInJson);
     }
