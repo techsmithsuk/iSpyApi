@@ -50,5 +50,4 @@ public class AppConfig {
                 System.getenv("ADMIN_PASSWORD")
         );
     }
-
 }

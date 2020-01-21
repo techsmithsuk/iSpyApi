@@ -1,0 +1,175 @@
+[
+  {
+    "reward_min": 0,
+    "age_range": null,
+    "scars_and_marks": "Searles has scars on his head and chest.  He has tattoos on his chest, abdomen, left and right arms, and left and right forearms.",
+    "additional_information": null,
+    "caution": "<p>The FBI's Washington Field Office is assisting the Metropolitan Police Department (MPD) in Washington, D.C. and the US Marshals Service Capital Area Task Force with their search for Juvon Julian Searles.  On Tuesday, July 24, 2018, at approximately 8:16 p.m., the MPD responded to a report of gunshots at the 800 Block of R Street, Northwest, Washington, D.C., where they located a male victim suffering from multiple gunshot wounds. The victim was transported to an area hospital for treatment of life-threatening injuries and was pronounced dead shortly thereafter.  On December 4, 2018, Searles was charged in the Superior Court of the District of Columbia with Second Degree Murder While Armed and a warrant was issued for his arrest.</p>\r\n<p> </p>",
+    "age_max": null,
+    "modified": "2020-01-17T19:32:50+00:00",
+    "locations": null,
+    "status": "na",
+    "publication": "2019-12-12T08:24:00",
+    "weight": "260 to 280 pounds",
+    "description": "Second Degree Murder While Armed",
+    "coordinates": [],
+    "remarks": null,
+    "age_min": null,
+    "images": [
+      {
+        "caption": null,
+        "large": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image/large",
+        "thumb": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image/thumb",
+        "original": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/@@images/image"
+      }
+    ],
+    "nationality": "American",
+    "dates_of_birth_used": [
+      "October 9, 1980",
+      "October 9, 1981",
+      "October 19, 1980",
+      "June 11, 1985"
+    ],
+    "uid": "1aa0a21720cb42678a32087c3c8fc3db",
+    "race": "black",
+    "aliases": [
+      "Jerrell Abrams",
+      "Juvon Searles",
+      "Juvon J. Searles",
+      "Juvon Jullian Searles",
+      "Jovan Julian Searles",
+      "Jovan Searles",
+      "Jovon Searles",
+      "Jovon Julan Searles",
+      "Jovon Julian Searles",
+      "Jovon Jullian Searles",
+      "Juvon Julian Serles",
+      "Jovan Serles",
+      "Jovon Julian Serles"
+    ],
+    "person_classification": "Main",
+    "place_of_birth": "Washington, D.C.",
+    "possible_states": null,
+    "languages": null,
+    "race_raw": "Black",
+    "subjects": [
+      "Law Enforcement Assistance"
+    ],
+    "field_offices": [
+      "washingtondc"
+    ],
+    "files": [
+      {
+        "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles/download.pdf",
+        "name": "English"
+      }
+    ],
+    "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/juvon-julian-searles",
+    "ncic": null,
+    "legat_names": null,
+    "eyes": "brown",
+    "sex": "Male",
+    "reward_max": 0,
+    "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+    "path": "/wanted/law-enforcement-assistance/juvon-julian-searles",
+    "weight_min": 260,
+    "possible_countries": null,
+    "occupations": null,
+    "suspects": null,
+    "weight_max": 280,
+    "hair": "black",
+    "complexion": null,
+    "hair_raw": "Black",
+    "eyes_raw": "Brown",
+    "height_max": 73,
+    "details": null,
+    "height_min": 69,
+    "reward_text": "The FBI is offering a reward of up to $10,000 for information leading to the arrest of Juvon Julian Searles.  Additional reward money may be available.",
+    "build": null,
+    "title": "JUVON JULIAN SEARLES",
+    "@id": "https://api.fbi.gov/@wanted-person/1aa0a21720cb42678a32087c3c8fc3db"
+  },
+  {
+    "reward_min": 0,
+    "age_range": null,
+    "scars_and_marks": null,
+    "additional_information": null,
+    "caution": "<p>Cesar Munguia is wanted for his alleged involvement in the armed robbery of the Webster Bank located on McLean Avenue in Yonkers, New York, and the armed robbery of a bodega on Warburton Avenue in Yonkers, New York, both of which occurred on October 14, 2014. Munguia is allegedly an associate of the Cruddy 650, a violent criminal street gang which is allegedly responsible for a pattern of bank robberies and commercial robberies in Yonkers and its surrounding neighborhoods in October and November of 2014. A federal arrest warrant was issued for Munguia on February 17, 2015, after he was indicted by a grand jury in the Southern District of New York, White Plains, New York, for conspiracy to commit Hobbs Act robbery and firearms offenses.</p>",
+    "age_max": null,
+    "modified": "2020-01-16T13:03:09+00:00",
+    "locations": null,
+    "status": "na",
+    "publication": "2015-03-30T07:00:00",
+    "weight": "200 pounds",
+    "description": "Conspiracy to Commit Hobbs Act Robbery; Firearms Offenses",
+    "coordinates": [],
+    "remarks": "<p>Munguia speaks Spanish and has ties to Mexico.</p>",
+    "age_min": null,
+    "images": [
+      {
+        "caption": null,
+        "large": "https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/large",
+        "thumb": "https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image/thumb",
+        "original": "https://www.fbi.gov/wanted/additional/cesar-munguia/@@images/image"
+      }
+    ],
+    "nationality": "Mexican",
+    "dates_of_birth_used": [
+      "July 18, 1994"
+    ],
+    "uid": "2611092a-4356-46c3-a573-5081ee8771bf",
+    "race": "hispanic",
+    "aliases": [
+      "Cesar Atraega",
+      "Cesar Munguia Arteaga",
+      "Cesar Munguia Artaega",
+      "Cesar Mungua",
+      "Cesar C"
+    ],
+    "person_classification": "Main",
+    "place_of_birth": "Mexico",
+    "possible_states": null,
+    "languages": null,
+    "race_raw": "White (Hispanic)",
+    "subjects": [
+      "Additional Violent Crimes"
+    ],
+    "field_offices": [
+      "newyork"
+    ],
+    "files": [
+      {
+        "url": "https://www.fbi.gov/wanted/additional/cesar-munguia/download.pdf",
+        "name": "English"
+      },
+      {
+        "url": "https://www.fbi.gov/wanted/additional/cesar-munguia/cesar-munguia-en-espanol.pdf/@@download/file/Cesar Munguía EN ESPAÑOL.pdf",
+        "name": "EN ESPAÑOL"
+      }
+    ],
+    "url": "https://www.fbi.gov/wanted/additional/cesar-munguia",
+    "ncic": "W812976080",
+    "legat_names": null,
+    "eyes": "blue",
+    "sex": "Male",
+    "reward_max": 0,
+    "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+    "path": "/wanted/additional/cesar-munguia",
+    "weight_min": 200,
+    "possible_countries": null,
+    "occupations": null,
+    "suspects": null,
+    "weight_max": 200,
+    "hair": "brown",
+    "complexion": null,
+    "hair_raw": "Brown",
+    "eyes_raw": "Blue",
+    "height_max": 72,
+    "details": null,
+    "height_min": 72,
+    "reward_text": null,
+    "build": null,
+    "title": "CESAR MUNGUIA",
+    "@id": "https://api.fbi.gov/@wanted-person/2611092a-4356-46c3-a573-5081ee8771bf"
+  }
+]
