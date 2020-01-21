@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("testDataSource")
+@ActiveProfiles({"testDataSource","testSigner","testLoginConfig"})
 @ContextConfiguration(classes = IntegrationTestConfig.class)
 public class FbiDataServiceTest {
 

@@ -21,14 +21,6 @@ public class IntegrationTestConfig{
         return pg.getPostgresDatabase();
     }
 
-    @RestController
-    public static class TestController {
-
-        @RequestMapping("/throwsException")
-        public void throwsException() throws Exception {
-            throw new Exception();
-        }
-    }
 
     @Bean(name="signer")
     @Profile("testSigner")
@@ -43,5 +35,14 @@ public class IntegrationTestConfig{
                 "username",
                 "password"
         );
+    }
+
+    @RestController
+    public static class TestController {
+
+        @RequestMapping("/throwsException")
+        public void throwsException() throws Exception {
+            throw new Exception();
+        }
     }
 }

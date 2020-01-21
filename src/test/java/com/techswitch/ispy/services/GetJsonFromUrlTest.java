@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("testDataSource")
+@ActiveProfiles({"testDataSource","testSigner","testLoginConfig"})
 @ContextConfiguration(classes = IntegrationTestConfig.class)
 public class GetJsonFromUrlTest {
 
