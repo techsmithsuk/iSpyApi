@@ -37,7 +37,10 @@ public class ReportService {
     }
 
     public List<ReportDatabaseModel> getAllReports(Filter filter){
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM reports LIMIT :limit OFFSET :offset")
+        return jdbi.withHandle(handle -> handle.createQuery("select id, suspect_id, " +
+                "to_char(date_of_sighting, 'dd-mm-yyyy') as date_of_sighting, location, description, " +
+                "to_char(timestamp_submitted, 'dd-mm-yyyy  HH24:mm:ss') as timestamp_submitted " +
+                "from reports LIMIT :limit OFFSET :offset")
                 .bind("limit",filter.getPageSize())
                 .bind("offset",filter.getOffset())
                 .mapToBean(ReportDatabaseModel.class)
