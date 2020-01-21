@@ -1,6 +1,6 @@
 package com.techswitch.ispy.controllers;
 
-import com.techswitch.ispy.models.database.SuspectDatabaseModel;
+import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
 import com.techswitch.ispy.services.FbiDataService;
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class FbiDataController {
 
     @RequestMapping(value = "/admin/fetch-fbi-data")
     public ResponseEntity fetchFbiData() throws IOException, ParseException {
-        List<SuspectDatabaseModel> suspects = fbiDataService.getSuspectsFromFbiApi();
+        List<SuspectFbiRequestModel> suspects = fbiDataService.getSuspectsFromFbiApi();
         int insertedSuspects = suspectsService.addSuspectsAndReturnNumberOfInsertedSuspects(suspects);
         if (insertedSuspects == 0) {
             return ResponseEntity.ok().body(Collections.singletonMap("Success", "No data has been added. Database Up to date."));

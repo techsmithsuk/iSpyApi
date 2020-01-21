@@ -17,8 +17,8 @@ public class HandleException {
 
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handle(MethodArgumentNotValidException ex) {
-//        if (ex instanceof MethodArgumentNotValidException) {
+    public ResponseEntity<Object> handle(Exception ex) {
+        if (ex instanceof MethodArgumentNotValidException) {
             Map<String, String> errors = new HashMap<>();
             ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors().forEach((error) -> {
                 String fieldName = ((FieldError) error).getField();
@@ -27,11 +27,11 @@ public class HandleException {
             });
 
             return ResponseEntity.badRequest().body(errors);
-//        }
-//        if (ex instanceof HttpMessageNotReadableException) {
-//            return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Bad Request"));
-//        }
-//
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("Error", "Internal Server Error"));
+        }
+        if (ex instanceof HttpMessageNotReadableException) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Bad Request"));
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("Error", "Internal Server Error"));
     }
 }

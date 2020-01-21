@@ -1,32 +1,32 @@
 CREATE TABLE if not exists suspects
 (
-    id                  serial primary key,
-    dates_of_birth_used varchar(1000),
-    hair                varchar(300),
-    eyes                varchar(300),
-    height_min          varchar(30),
-    height_max          varchar(30),
-    weight              varchar(300),
-    sex                 varchar(10),
-    race                varchar(150),
-    nationality         varchar(200),
-    scars_and_marks     varchar(5000),
-    reward_text         varchar(2000),
-    caution             varchar(15000),
-    details             varchar(15000),
-    warning_message     varchar(3000),
-    uid                 varchar(300) unique ,
-    modified            timestamp,
-    publication         timestamp
+    id              serial primary key,
+    title           varchar(300),
+    date_of_birth   varchar(1000),
+    hair            varchar(300),
+    eyes            varchar(300),
+    height          varchar(30),
+    weight          varchar(300),
+    sex             varchar(10),
+    race            varchar(150),
+    nationality     varchar(200),
+    scars_and_marks varchar(5000),
+    reward_text     varchar(2000),
+    caution         varchar(15000),
+    details         varchar(15000),
+    warning_message varchar(3000),
+    fbi_uid         varchar(300) unique,
+    modified        timestamp,
+    publication     timestamp
 );
 
 CREATE TABLE IF NOT EXISTS reports
 (
     id                  serial primary key,
     date_of_sighting    date,
-    description         character varying(2000) NOT NULL,
+    description         character varying(2000)     NOT NULL,
     location            character varying(200),
-    suspect_id          integer                 NOT NULL,
+    suspect_id          integer                     NOT NULL,
     timestamp_submitted timestamp without time zone NOT NULL
 );
 
@@ -39,5 +39,3 @@ CREATE TABLE if not exists suspect_photo_urls
     large     VARCHAR(1000),
     caption   varchar(1000)
 );
-
-

@@ -2,6 +2,7 @@ package com.techswitch.ispy.services;
 
 import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.database.SuspectDatabaseModel;
+import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,9 @@ import java.util.Optional;
 @Service
 public class SuspectsService {
 
-
     private Jdbi jdbi;
-    private final String UPDATE_SUSPECT_QUERY_SCRIPT = "INSERT INTO suspects (dates_of_birth_used, hair, eyes, " +
-            "height_min, height_max, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, " +
-            "warning_message, uid, modified, publication) \n" +
-            "values (:datesOfBirthUsed, :hair, :eyes, :heightMin, :heightMax, :weight, :sex, :race, :nationality, " +
-            ":scarsAndMarks, :rewardText, :caution, :details, :warningMessage, :uid, :modified, :publication) ON CONFLICT (uid) DO NOTHING RETURNING id;";
+    private final String UPDATE_SUSPECT_QUERY_SCRIPT = "INSERT INTO suspects (title, date_of_birth, hair, eyes, height, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, warning_message, fbi_uid, modified, publication) \n" +
+            "values (:title, :dateOfBirth, :hair, :eyes, :height, :weight, :sex, :race, :nationality, :scarsAndMarks, :rewardText, :caution, :details, :warningMessage, :fbiUid, :modified, :publication) ON CONFLICT (fbi_uid) DO NOTHING RETURNING id;";
 
     private final String UPDATE_SUSPECT_PHOTO_SCRIPT = "INSERT INTO suspect_photo_urls (suspectId, original, thumb, large, caption) VALUES (:suspectId, :original, :thumb, :large, :caption);";
 
@@ -45,24 +42,23 @@ public class SuspectsService {
                 .findOne());
     }
 
-    public int addSuspectsAndReturnNumberOfInsertedSuspects(List<SuspectDatabaseModel> suspects) throws ParseException {
+    public int addSuspectsAndReturnNumberOfInsertedSuspects(List<SuspectFbiRequestModel> suspects) throws ParseException {
         int rowsInserted = 0;
-        for (SuspectDatabaseModel suspect : suspects) {
+        for (SuspectFbiRequestModel suspect : suspects) {
             rowsInserted += addSuspect(suspect);
         }
         return rowsInserted;
     }
 
-
-    public int addSuspect(SuspectDatabaseModel suspect) throws ParseException {
+    public int addSuspect(SuspectFbiRequestModel suspect) throws ParseException {
         Optional<Long> suspectId = null;
         try (Handle handle = jdbi.open()) {
             suspectId = handle.createQuery(UPDATE_SUSPECT_QUERY_SCRIPT)
-                    .bind("datesOfBirthUsed", suspect.getDatesOfBirthUsedAsSingleString())
+                    .bind("title", suspect.getTitle())
+                    .bind("dateOfBirth", suspect.getDatesOfBirthUsedAsSingleString())
                     .bind("hair", suspect.getHair())
                     .bind("eyes", suspect.getEyes())
-                    .bind("heightMin", suspect.getHeightMin())
-                    .bind("heightMax", suspect.getHeightMax())
+                    .bind("height", suspect.getHeightMin())
                     .bind("weight", suspect.getWeight())
                     .bind("sex", suspect.getSex())
                     .bind("race", suspect.getRace())
@@ -72,12 +68,12 @@ public class SuspectsService {
                     .bind("caution", suspect.getCaution())
                     .bind("details", suspect.getDetails())
                     .bind("warningMessage", suspect.getWarningMessage())
-                    .bind("uid", suspect.getUid())
+                    .bind("fbiUid", suspect.getUid())
                     .bind("modified", suspect.getModifiedAsTimestamp())
                     .bind("publication", suspect.getPublicationAsTimestamp())
                     .mapTo(Long.class)
                     .findOne();
-            if(!suspectId.isPresent()){
+            if (!suspectId.isPresent()) {
                 return 0;
             }
 
@@ -93,12 +89,5 @@ public class SuspectsService {
             }
         }
         return 1;
-    }
-
-    private boolean isSuspectPresentInDatabase(SuspectDatabaseModel suspect, Handle handle) {
-        return handle.createQuery("SELECT EXISTS(SELECT 1 FROM suspects where uid = :uid);")
-                .bind("uid", suspect.getUid())
-                .mapTo(Boolean.class)
-                .one();
     }
 }

@@ -2,7 +2,7 @@ package com.techswitch.ispy.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.config.IntegrationTestConfig;
-import com.techswitch.ispy.models.database.SuspectDatabaseModel;
+import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
 import com.techswitch.ispy.services.FbiDataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +41,9 @@ public class FbiDataControllerTest {
 
     @Test
     public void fetchFbiData_givenAValidJson_thenReturnStatusOk() throws Exception {
-        List<SuspectDatabaseModel> suspects = new ArrayList<>();
+        List<SuspectFbiRequestModel> suspects = new ArrayList<>();
         File from = new File("src/test/java/com/techswitch/ispy/services/data/SuspectJson.json");
-        SuspectDatabaseModel suspect = objectMapper.readValue(from, SuspectDatabaseModel.class);
+        SuspectFbiRequestModel suspect = objectMapper.readValue(from, SuspectFbiRequestModel.class);
         suspects.add(suspect);
 
         when(fbiDataService.getSuspectsFromFbiApi()).thenReturn(suspects);
@@ -52,5 +52,4 @@ public class FbiDataControllerTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.Success").value("1 row(s) has been added to database."));
     }
-
 }

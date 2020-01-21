@@ -2,7 +2,7 @@ package com.techswitch.ispy.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techswitch.ispy.models.database.SuspectDatabaseModel;
+import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,14 +14,14 @@ import java.util.*;
 @Service
 public class FbiDataService {
 
-    public List<SuspectDatabaseModel> getSuspectsFromFbiApi() throws IOException {
+    public List<SuspectFbiRequestModel> getSuspectsFromFbiApi() throws IOException {
         int currentPage = 1;
-        List<SuspectDatabaseModel> suspects = new ArrayList<>();
+        List<SuspectFbiRequestModel> suspects = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode items = getJsonFromUrl(getFbiApiUrl(currentPage), "items");
         while (items.size() > 0) {
             for (JsonNode node : items) {
-                suspects.add(objectMapper.readValue(node.toString(), SuspectDatabaseModel.class));
+                suspects.add(objectMapper.readValue(node.toString(), SuspectFbiRequestModel.class));
             }
             items = getJsonFromUrl(getFbiApiUrl(++currentPage), "items");
         }
