@@ -47,7 +47,7 @@ class SuspectsControllerServiceTest {
     private Long addFakeSuspect(int id, String uid) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO suspects (id, title, date_of_birth, hair, eyes, height, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, warning_message, fbi_uid, modified, publication) " +
-                        "VALUES (:id, 'JUVON JULIAN SEARLES', 'October 9, 1980', 'black', 'brown','69', '260 to 280 pounds', 'Male', 'black', 'American', 'Searles has scars on his head and chest.','£10000', 'Dangerous', 'Missing person', 'SHOULD BE CONSIDERED ARMED AND DANGEROUS', :uid, '2020-01-17 19:32:50.000000', '2019-01-12 08:24:00.000000') RETURNING id;")
+                        "VALUES (:id, 'JUVON JULIAN SEARLES', 'October 9, 1980', 'black', 'brown','69', '260 to 280 pounds', 'Male', 'black', 'American', 'Searles has scars on his head and chest.','£10000', 'Dangerous', 'Missing person', 'SHOULD BE CONSIDERED ARMED AND DANGEROUS', :uid, '2020-01-16T13:02:26+00:00', '2012-06-06T11:00:00') RETURNING id;")
                         .bind("id", id)
                         .bind("uid", uid)
                         .mapTo(Long.class)

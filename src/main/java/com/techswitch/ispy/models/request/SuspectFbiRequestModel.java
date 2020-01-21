@@ -13,7 +13,6 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SuspectFbiRequestModel {
 
-    private Long id;
     private String title;
     @JsonProperty("dates_of_birth_used")
     private List<String> datesOfBirthUsed;
@@ -42,28 +41,6 @@ public class SuspectFbiRequestModel {
     public SuspectFbiRequestModel() {
     }
 
-    public SuspectFbiRequestModel(Long id, String title, List<String> datesOfBirthUsed, String hair, String eyes, Integer heightMin, String weight, String sex, String race, String nationality, String scarsAndMarks, String rewardText, String caution, String details, String warningMessage, List<Map<String, String>> images, String uid, String modified, String publication) {
-        this.id = id;
-        this.title = title;
-        this.datesOfBirthUsed = datesOfBirthUsed;
-        this.hair = hair;
-        this.eyes = eyes;
-        this.heightMin = heightMin;
-        this.weight = weight;
-        this.sex = sex;
-        this.race = race;
-        this.nationality = nationality;
-        this.scarsAndMarks = scarsAndMarks;
-        this.rewardText = rewardText;
-        this.caution = caution;
-        this.details = details;
-        this.warningMessage = warningMessage;
-        this.images = images;
-        this.uid = uid;
-        this.modified = modified;
-        this.publication = publication;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -72,16 +49,8 @@ public class SuspectFbiRequestModel {
         this.title = title;
     }
 
-    public String getModified() {
-        return modified;
-    }
-
     public void setModified(String modified) {
         this.modified = modified;
-    }
-
-    public String getPublication() {
-        return publication;
     }
 
     public void setPublication(String publication) {
@@ -95,8 +64,6 @@ public class SuspectFbiRequestModel {
     public Timestamp getPublicationAsTimestamp() throws ParseException {
         return formatTimestamp(publication);
     }
-
-
 
     public String getUid() {
         return uid;
@@ -112,18 +79,6 @@ public class SuspectFbiRequestModel {
 
     public void setImages(List<Map<String, String>> images) {
         this.images = images;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<String> getDatesOfBirthUsed() {
-        return datesOfBirthUsed;
     }
 
     public void setDatesOfBirthUsed(List<String> datesOfBirthUsed) {
