@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +30,10 @@ public class HandleException {
             return ResponseEntity.badRequest().body(errors);
         }
         if (ex instanceof HttpMessageNotReadableException) {
+            System.out.println(ex.getMessage());
             return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Bad Request"));
         }
-
+        System.out.println(ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("Error", "Internal Server Error"));
     }
 }
