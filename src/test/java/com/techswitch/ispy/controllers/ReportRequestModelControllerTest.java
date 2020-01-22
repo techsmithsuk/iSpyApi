@@ -45,7 +45,7 @@ public class ReportRequestModelControllerTest {
 
     @Test
     public void validRequest_createReport_thenStatusIsCreated() throws Exception {
-        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "12-02-2019", "London", "description text");
+        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "2018-04-13", "London", "description text");
         String requestJson = objectMapper.writeValueAsString(reportRequestModel);
 
         mockMvc.perform(post("http://localhost:8080/reports/create")
@@ -54,7 +54,7 @@ public class ReportRequestModelControllerTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.suspectId").value("1"))
-                .andExpect(jsonPath("$.dateOfSighting").value("12-02-2019"))
+                .andExpect(jsonPath("$.dateOfSighting").value("2018-04-13"))
                 .andExpect(jsonPath("$.location").value("London"))
                 .andExpect(jsonPath("$.description").value("description text"))
                 .andExpect(jsonPath("$.timestampSubmitted").exists())
@@ -63,7 +63,7 @@ public class ReportRequestModelControllerTest {
 
     @Test
     public void invalidRequest_createReport_returnsValidationError() throws Exception {
-        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "12-02-2019", "London", "");
+        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "2018-04-13", "London", "");
         String requestJson = objectMapper.writeValueAsString(reportRequestModel);
 
         mockMvc.perform(post("http://localhost:8080/reports/create")
