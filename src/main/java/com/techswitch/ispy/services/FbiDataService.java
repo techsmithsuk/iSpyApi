@@ -3,8 +3,6 @@ package com.techswitch.ispy.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
-import org.checkerframework.checker.units.qual.A;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +20,7 @@ public class FbiDataService {
     public List<SuspectFbiRequestModel> getSuspectsFromFbiApi() throws IOException {
         int currentPage = 1;
         List<SuspectFbiRequestModel> suspects = new ArrayList<>();
+        System.out.println("[METHOD - GET-SUSPECTS-FROM-FBI-API]: starting to get suspects from fbi api");
         JsonNode items = getJsonFromUrl(getFbiApiUrl(currentPage), "items");
         while (items.size() > 0) {
             for (JsonNode node : items) {
@@ -29,6 +28,7 @@ public class FbiDataService {
             }
             items = getJsonFromUrl(getFbiApiUrl(++currentPage), "items");
         }
+        System.out.println("[METHOD - GET-SUSPECTS-FROM-FBI-API]: FINISHED to get suspects from fbi api");
         return suspects;
     }
 
