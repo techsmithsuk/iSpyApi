@@ -47,4 +47,9 @@ class TokenValidatorTest {
         assertThat(tokenValidator.validateToken(token)).isFalse();
     }
 
+    @Test
+    public void returnsFalseIfTokenNull(){
+        TokenValidator tokenValidator = new TokenValidator("samplesigner");
+        assertThat(tokenValidator.validateToken(null)).isFalse();
+    }
 }
