@@ -4,11 +4,11 @@ import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.database.ReportDatabaseModel;
 import com.techswitch.ispy.models.request.ReportRequestModel;
 import com.techswitch.ispy.services.ReportService;
+import com.techswitch.ispy.services.token_validation.TokenValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,21 +17,30 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-staging.herokuapp.com", "https://techswitch-i-spy.herokuapp.com"})
 @RequestMapping("reports")
 public class ReportController {
 
     private ReportService reportService;
+    private TokenValidator tokenValidator;
 
     @Autowired
-    public ReportController(ReportService reportService) {
+    public ReportController(ReportService reportService,TokenValidator tokenValidator) {
         this.reportService = reportService;
+        this.tokenValidator = tokenValidator;
     }
 
     @RequestMapping(method = GET)
     @ResponseBody
-    public List<ReportDatabaseModel> getReportListFiltered(Filter filter) {
-        List<ReportDatabaseModel> reportList = reportService.getAllReports(filter);
-        return reportList;
+    public ResponseEntity getReportListFiltered(@RequestHeader(value = "token",required = false) String token, Filter filter) {
+        if(token == null){
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        if(tokenValidator.validateToken(token)) {
+            List<ReportDatabaseModel> reportList = reportService.getAllReports(filter);
+            return ResponseEntity.status(HttpStatus.OK).body(reportList);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
     @RequestMapping(value = "/create", method = POST, consumes = "application/json")
