@@ -20,7 +20,15 @@ public class SuspectDatabaseModel {
     private String fbiUid;
     private String modified;
     private String publication;
+    private String imageUrl;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Long getId() {
         return id;
