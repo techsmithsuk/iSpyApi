@@ -100,7 +100,7 @@ class SuspectsControllerServiceTest {
     }
 
     @Test
-    void getListOfSuspects() throws Exception {
+    void getListOfSuspectsFirstPage() throws Exception {
         mockMvc.perform(get("http://localhost:8080/suspects?page=1&pageSize=1"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.items.[0].fbiUid").value("IamAbigBouy"))
@@ -108,6 +108,17 @@ class SuspectsControllerServiceTest {
                 .andExpect(jsonPath("$.previousPage").value(nullValue()))
                 .andReturn();
     }
+
+    @Test
+    void getListOfSuspectsSecondPage() throws Exception {
+        mockMvc.perform(get("http://localhost:8080/suspects?page=2&pageSize=1"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.[0].fbiUid").value("thisisAtest"))
+                .andExpect(jsonPath("$.nextPage").value(nullValue()))
+                .andExpect(jsonPath("$.previousPage").value("/suspects?page=1&pageSize=1"))
+                .andReturn();
+    }
+
 
     @Test
     void getSuspectById_givenValidId_thenReturnSuspect() throws Exception {
