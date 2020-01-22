@@ -1,5 +1,6 @@
 package com.techswitch.ispy.controllers;
 import com.techswitch.ispy.Filter;
+import com.techswitch.ispy.models.api.SuspectListResponseModel;
 import com.techswitch.ispy.models.database.SuspectDatabaseModel;
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ public class SuspectsController {
     }
 
     @RequestMapping()
-    public List<SuspectDatabaseModel> getSuspectList(Filter filter) {
+    public SuspectListResponseModel getSuspectList(Filter filter) {
+        int numberOfSuspects = suspectsService.countSuspects();
         List<SuspectDatabaseModel> suspectList = suspectsService.getAllSuspects(filter);
-        return suspectList;
+        return new SuspectListResponseModel(suspectList, filter, numberOfSuspects);
     }
 
     @RequestMapping("/{id}")
