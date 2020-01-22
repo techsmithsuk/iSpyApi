@@ -2,7 +2,6 @@ package com.techswitch.ispy.services;
 
 import com.techswitch.ispy.config.IntegrationTestConfig;
 import com.techswitch.ispy.models.request.SuspectFbiRequestModel;
-import net.bytebuddy.asm.Advice;
 import org.jdbi.v3.core.Jdbi;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +38,17 @@ class SuspectsControllerServiceTest {
     @BeforeEach
     private void createSuspects() {
         addFakeSuspect(123, "IamAbigBouy");
+        addFakeImage(1,123);
         addFakeSuspect(1234, "thisisAtest");
+        addFakeImage(2,1234);
     }
 
     @AfterEach
     private void deleteSuspects() {
         deleteFakeSuspect(123);
         deleteFakeSuspect(1234);
+        deleteFakeImage(1);
+        deleteFakeImage(2);
     }
 
     private Long addFakeSuspect(int id, String uid) {
@@ -58,8 +61,27 @@ class SuspectsControllerServiceTest {
                         .one());
     }
 
+    private Long addFakeImage(int id, int suspectId){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("insert into suspect_photo_urls (suspectId, original, thumb, large, caption) values (:suspectId, :original, :thumb, :large, :caption) returning id;")
+                        .bind("id", id)
+                        .bind("suspectId", suspectId)
+                        .bind("original", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
+                        .bind("thumb", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
+                        .bind("large", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
+                        .bind("caption", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
+                        .mapTo(Long.class)
+                        .one());
+    }
+
     private void deleteFakeSuspect(int id) {
         jdbi.withHandle(handle -> handle.createUpdate("DELETE FROM suspects WHERE id = :id")
+                .bind("id", id)
+                .execute());
+    }
+
+    private void deleteFakeImage(int id){
+        jdbi.withHandle(handle -> handle.createUpdate("DELETE FROM suspect_photo_urls WHERE id = :id")
                 .bind("id", id)
                 .execute());
     }
@@ -78,13 +100,11 @@ class SuspectsControllerServiceTest {
 
     @Test
     void getListOfSuspects() throws Exception {
-
         mockMvc.perform(get("http://localhost:8080/suspects?page=1&pageSize=10"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].fbiUid").value("IamAbigBouy"))
                 .andExpect(jsonPath("[1].fbiUid").value("thisisAtest"))
                 .andExpect(jsonPath("[1].dateOfBirth").value("October 9, 1980"))
-
                 .andReturn();
     }
 
