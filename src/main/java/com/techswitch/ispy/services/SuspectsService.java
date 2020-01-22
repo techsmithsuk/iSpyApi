@@ -22,13 +22,20 @@ public class SuspectsService {
 
     private final String UPDATE_SUSPECT_PHOTO_SCRIPT = "INSERT INTO suspect_photo_urls (suspectId, original, thumb, large, caption) VALUES (:suspectId, :original, :thumb, :large, :caption);";
 
+    private final String SELECT_ALL_SUSPECTS_SCRIPT = "select distinct on (suspects.id)\n" +
+            "    suspects.id, suspects.title, suspects.date_of_birth, suspects.hair, suspects.eyes, suspects.height, suspects.weight, suspects.sex, suspects.race, suspects.nationality, suspects.scars_and_marks, suspects.reward_text, suspects.caution, suspects.details, suspects.warning_message, suspects.fbi_uid, suspects.modified, suspects.publication, suspect_photo_urls.original as image_url\n" +
+            "from\n" +
+            "    suspects\n" +
+            "        inner join\n" +
+            "    suspect_photo_urls on suspect_photo_urls.suspectid = suspects.id order by suspects.id, suspect_photo_urls.id asc LIMIT :limit OFFSET :offset;";
+
     @Autowired
     public SuspectsService(Jdbi jdbi) {
         this.jdbi = jdbi;
     }
 
     public List<SuspectDatabaseModel> getAllSuspects(Filter filter) {
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM suspects LIMIT :limit OFFSET :offset")
+        return jdbi.withHandle(handle -> handle.createQuery(SELECT_ALL_SUSPECTS_SCRIPT)
                 .bind("limit", filter.getPageSize())
                 .bind("offset", filter.getOffset())
                 .mapToBean(SuspectDatabaseModel.class)
