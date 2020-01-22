@@ -36,7 +36,7 @@ public class NukeController {
         ResponseEntity failedAttempt = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         ResponseEntity successfulAttempt = ResponseEntity.status(HttpStatus.OK).body("Success Data Purged From Database");
 
-        if(!tokenValidator.validateToken(token)){
+        if(token == null || !tokenValidator.validateToken(token)){
             return failedAttempt;
         }
 

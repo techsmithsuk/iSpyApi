@@ -1,14 +1,10 @@
 package com.techswitch.ispy.services;
 
-import com.sun.security.ntlm.Client;
-import com.techswitch.ispy.Filter;
-import com.techswitch.ispy.models.database.SuspectDatabaseModel;
-import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
 public class NukeService {
 
     private Jdbi jdbi;
@@ -19,15 +15,9 @@ public class NukeService {
     }
 
     public void truncateAllRowsInAllTables() {
-
-        String SQL =    "TRUNCATE TABLE suspects; \n" +
-                        "TRUNCATE TABLE suspect_photo_urls; \n" +
-                        "TRUNCATE TABLE reports; \n";
-
-        Handle client = jdbi.open();
+        System.out.println("here");
+        String SQL =    "TRUNCATE suspects, suspect_photo_urls, reports RESTART IDENTITY;";
+        System.out.println("now here");
         jdbi.withHandle(handle -> handle.createUpdate(SQL).execute());
-        client.close();
     }
-
-
 }
