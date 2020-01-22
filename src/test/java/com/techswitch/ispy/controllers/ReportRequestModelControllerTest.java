@@ -1,7 +1,10 @@
 package com.techswitch.ispy.controllers;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techswitch.ispy.config.IntegrationTestConfig;
+import com.techswitch.ispy.models.Token;
 import com.techswitch.ispy.models.request.ReportRequestModel;
 import com.techswitch.ispy.services.ReportService;
 import org.jdbi.v3.core.Jdbi;
@@ -13,6 +16,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Date;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -23,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = IntegrationTestConfig.class)
-@ActiveProfiles({"testDataSource","testSigner","testLoginConfig"})
+@ActiveProfiles({"testDataSource", "testSigner", "testLoginConfig"})
 public class ReportRequestModelControllerTest {
 
     @Autowired
@@ -80,11 +85,38 @@ public class ReportRequestModelControllerTest {
 
 
     @Test
-    public void givenValidUrl_thenReturnListOfReports() throws Exception {
+    public void givenValidToken_thenReturnListOfReports() throws Exception {
         addFakeData(5);
-        mockMvc.perform(get("http://localhost:8080/reports"))
+
+        Algorithm algorithm = Algorithm.HMAC256("signerstring");
+        String token = (JWT.create()
+                .withIssuer("techswitch-ispy")
+                .sign(algorithm));
+
+        String requestJson = objectMapper.writeValueAsString(token);
+
+        mockMvc.perform(get("http://localhost:8080/reports")
+                .contentType(APPLICATION_JSON)
+                .header("token",token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(5)
+                );
+    }
+
+    @Test
+    public void givenInvalidToken_thenReturnBADREQUEST() throws Exception {
+
+        mockMvc.perform(get("http://localhost:8080/reports")
+                .contentType(APPLICATION_JSON)
+                .header("token","invalid token"))
+                .andExpect(status().isBadRequest()
+                );
+    }
+    @Test
+    public void givenNoToken_thenReturnBADREQUEST() throws Exception {
+
+        mockMvc.perform(get("http://localhost:8080/reports"))
+                .andExpect(status().isBadRequest()
                 );
     }
 
