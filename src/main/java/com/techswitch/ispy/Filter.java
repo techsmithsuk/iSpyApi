@@ -22,6 +22,10 @@ public class Filter {
         this.pageSize = pageSize;
     }
 
+    public Integer getPage() {
+        return page;
+    }
+
     public Integer getOffset() {
         return (page - 1) * pageSize;
     }
