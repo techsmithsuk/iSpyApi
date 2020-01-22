@@ -30,10 +30,10 @@ public class HandleException {
             return ResponseEntity.badRequest().body(errors);
         }
         if (ex instanceof HttpMessageNotReadableException) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
             return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Bad Request"));
         }
-        System.out.println(ex.getMessage());
+        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("Error", "Internal Server Error"));
     }
 }

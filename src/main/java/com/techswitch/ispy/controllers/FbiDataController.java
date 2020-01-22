@@ -30,13 +30,15 @@ public class FbiDataController {
 
     @RequestMapping(value = "/fetch-fbi-data")
     public ResponseEntity fetchFbiData() throws IOException, ParseException {
+        System.out.println("[METHOD - FETCHFBIDATA]: starting to get suspects from fbi api");
         List<SuspectFbiRequestModel> suspects = fbiDataService.getSuspectsFromFbiApi();
+        System.out.println("[METHOD - FETCHFBIDATA]: finished to get suspects from fbi api");
+        System.out.println("[METHOD - FETCHFBIDATA]: started to add suspects to database");
         int insertedSuspects = suspectsService.addSuspectsAndReturnNumberOfInsertedSuspects(suspects);
+        System.out.println("[METHOD - FETCHFBIDATA]: Finished to add suspects to database");
         if (insertedSuspects == 0) {
             return ResponseEntity.ok().body(Collections.singletonMap("Success", "No data has been added. Database Up to date."));
         }
         return ResponseEntity.ok().body(Collections.singletonMap("Success", insertedSuspects + " row(s) has been added to database."));
     }
-
-
 }
