@@ -24,23 +24,19 @@ public class ReportService {
         return jdbi.withHandle(handle ->
                 handle.createQuery("INSERT INTO reports (suspect_id, date_of_sighting, location, description, timestamp_submitted) " +
                         "VALUES (:suspectId, :date, :location, :description, :timestampSubmitted) " +
-                        "RETURNING id, suspect_id, to_char(date_of_sighting, 'dd-mm-yyyy') as date_of_sighting, location, " +
-                        "description, to_char(timestamp_submitted, 'dd-mm-yyyy  HH24:mm:ss') as timestamp_submitted")
+                        "RETURNING *")
                         .bind("suspectId", reportRequestModel.getSuspectId())
                         .bind("date", reportRequestModel.createSqlDate())
                         .bind("location", reportRequestModel.getLocation())
                         .bind("description", reportRequestModel.getDescription())
-                        .bind("timestampSubmitted", Timestamp.valueOf(LocalDateTime.now()))
+                        .bind("timestampSubmitted", LocalDateTime.now())
                         .mapToBean(ReportDatabaseModel.class)
                         .first()
         );
     }
 
     public List<ReportDatabaseModel> getAllReports(Filter filter){
-        return jdbi.withHandle(handle -> handle.createQuery("select id, suspect_id, " +
-                "to_char(date_of_sighting, 'dd-mm-yyyy') as date_of_sighting, location, description, " +
-                "to_char(timestamp_submitted, 'dd-mm-yyyy  HH24:mm:ss') as timestamp_submitted " +
-                "from reports LIMIT :limit OFFSET :offset")
+        return jdbi.withHandle(handle -> handle.createQuery("select * from reports LIMIT :limit OFFSET :offset")
                 .bind("limit",filter.getPageSize())
                 .bind("offset",filter.getOffset())
                 .mapToBean(ReportDatabaseModel.class)
