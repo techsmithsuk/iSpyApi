@@ -103,4 +103,11 @@ public class SuspectsService {
         }
         return 1;
     }
+
+    public int countSuspects() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM suspects")
+                .mapTo(Integer.class)
+                .one());
+    }
 }
