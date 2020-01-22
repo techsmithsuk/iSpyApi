@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-staging.herokuapp.com", "https://techswitch-i-spy.herokuapp.com"})
+@RequestMapping(value = "admin")
 public class FbiDataController {
 
     private FbiDataService fbiDataService;
@@ -27,7 +28,7 @@ public class FbiDataController {
         this.suspectsService = suspectsService;
     }
 
-    @RequestMapping(value = "/admin/fetch-fbi-data")
+    @RequestMapping(value = "/fetch-fbi-data")
     public ResponseEntity fetchFbiData() throws IOException, ParseException {
         List<SuspectFbiRequestModel> suspects = fbiDataService.getSuspectsFromFbiApi();
         int insertedSuspects = suspectsService.addSuspectsAndReturnNumberOfInsertedSuspects(suspects);
