@@ -40,9 +40,6 @@ public class ReportRequestModelControllerTest {
     @Autowired
     private Jdbi jdbi;
 
-    @Autowired
-    private ReportService reportService;
-
     @Test
     public void validRequest_createReport_thenStatusIsCreated() throws Exception {
         ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "12-02-2019", "London", "description text");

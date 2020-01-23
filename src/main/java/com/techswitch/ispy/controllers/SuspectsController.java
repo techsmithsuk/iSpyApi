@@ -2,6 +2,8 @@ package com.techswitch.ispy.controllers;
 import com.techswitch.ispy.Filter;
 import com.techswitch.ispy.models.api.SuspectListResponseModel;
 import com.techswitch.ispy.models.database.SuspectDatabaseModel;
+import com.techswitch.ispy.models.database.SuspectsImagesDatabaseModel;
+import com.techswitch.ispy.services.ImagesService;
 import com.techswitch.ispy.services.SuspectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,15 @@ import java.util.Optional;
 public class SuspectsController {
 
     private SuspectsService suspectsService;
+    private ImagesService imagesService;
 
     @Autowired
-    public SuspectsController(SuspectsService suspectsService) {
+    public SuspectsController(SuspectsService suspectsService, ImagesService imagesService) {
         this.suspectsService = suspectsService;
+        this.imagesService = imagesService;
     }
+
+
 
     @RequestMapping()
     public SuspectListResponseModel getSuspectList(Filter filter) {
@@ -38,6 +44,12 @@ public class SuspectsController {
             return ResponseEntity.ok().body(suspectFromDatabase);
         }
         return ResponseEntity.badRequest().body(Collections.singletonMap("Error", "Suspect with id: " + id + " not found"));
+    }
+
+    @RequestMapping("/{id}/images")
+    public ResponseEntity getImagesBySuspectId(@PathVariable int id){
+        List<SuspectsImagesDatabaseModel> imagesBySuspectId = imagesService.getImageBySuspectId(id);
+        return ResponseEntity.ok().body(imagesBySuspectId);
     }
 }
 
