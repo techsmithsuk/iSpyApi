@@ -42,19 +42,12 @@ public class ReportRequestModelControllerTest {
 
     @Test
     public void validRequest_createReport_thenStatusIsCreated() throws Exception {
-        ReportRequestModel reportRequestModel = new ReportRequestModel(1L, "13-04-2018", "London", "description text");
-        String requestJson = objectMapper.writeValueAsString(reportRequestModel);
-
         mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
+                .param("suspectId","1")
+                .param("date","13-04-2018")
+                .param("location","London")
+                .param("description","description text"))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.suspectId").value("1"))
-                .andExpect(jsonPath("$.dateOfSighting").value("13-04-2018"))
-                .andExpect(jsonPath("$.location").value("London"))
-                .andExpect(jsonPath("$.description").value("description text"))
-                .andExpect(jsonPath("$.timestampSubmitted").exists())
                 .andReturn();
     }
 
@@ -64,20 +57,12 @@ public class ReportRequestModelControllerTest {
         String requestJson = objectMapper.writeValueAsString(reportRequestModel);
 
         mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
+                .param("suspectId","1")
+                .param("date","13-04-2018")
+                .param("location","London")
+                .param("description",""))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.description").value("Description cannot be empty"));
-    }
-
-    @Test
-    public void givenRequestWithInvalidJson_theStatusBadRequest() throws Exception {
-        String requestJson = "{\"suspectId\":}";
-        mockMvc.perform(post("http://localhost:8080/reports/create")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.Error").value("Bad Request"));
+                .andReturn();
     }
 
 
