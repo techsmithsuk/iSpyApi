@@ -4,7 +4,6 @@ import com.techswitch.ispy.models.request.validator.ValidDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -61,8 +60,8 @@ public class ReportRequestModel {
         this.description = description;
     }
 
-    public Date createSqlDate() {
+    public LocalDate createSqlDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_INPUT);
-        return Date.valueOf(LocalDate.parse(date, formatter));
+        return LocalDate.parse(date, formatter);
     }
 }

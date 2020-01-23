@@ -12,13 +12,13 @@ public class DateValidatorTest {
 
     @Test
     public void dateValidatorReturnsTrueForValidDate() {
-        String validDate = "18-07-1992";
+        String validDate = "13-04-2018";
         boolean isValid = validator.isValid(validDate, null);
         assertThat(isValid).isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "18/07/1992", "12022019", "1579190045", "" })
+    @ValueSource(strings = { "18/07/1992", "12022019", "1579190045", "", "2018/04/13" })
     public void dateValidatorReturnsFalseForInvalidDate(String invalidInput) {
         boolean isValid = validator.isValid(invalidInput, null);
         assertThat(isValid).isFalse();

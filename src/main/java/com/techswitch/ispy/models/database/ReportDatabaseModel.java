@@ -1,13 +1,15 @@
 package com.techswitch.ispy.models.database;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ReportDatabaseModel {
 
     private Long id;
     private Long suspectId;
-    private String dateOfSighting;
+    private LocalDate dateOfSighting;
     private String location;
     private String description;
-    private String timestampSubmitted;
+    private LocalDateTime timestampSubmitted;
 
     public Long getId() {
         return id;
@@ -23,14 +25,6 @@ public class ReportDatabaseModel {
 
     public void setSuspectId(Long suspectId) {
         this.suspectId = suspectId;
-    }
-
-    public String getDateOfSighting() {
-        return dateOfSighting;
-    }
-
-    public void setDateOfSighting(String dateOfSighting) {
-        this.dateOfSighting = dateOfSighting;
     }
 
     public String getLocation() {
@@ -49,11 +43,19 @@ public class ReportDatabaseModel {
         this.description = description;
     }
 
-    public String getTimestampSubmitted() {
+    public LocalDate getDateOfSighting() {
+        return dateOfSighting;
+    }
+
+    public void setDateOfSighting(LocalDate dateOfSighting) {
+        this.dateOfSighting = dateOfSighting;
+    }
+
+    public LocalDateTime getTimestampSubmitted() {
         return timestampSubmitted;
     }
 
-    public void setTimestampSubmitted(String timestampSubmitted) {
+    public void setTimestampSubmitted(LocalDateTime timestampSubmitted) {
         this.timestampSubmitted = timestampSubmitted;
     }
 }
