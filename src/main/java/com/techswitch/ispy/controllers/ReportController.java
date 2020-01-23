@@ -46,9 +46,8 @@ public class ReportController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @RequestMapping(value = "/create", method = POST, consumes = "application/json")
-    @ResponseBody
-    public ReportApiModel createReport(@Valid @RequestBody ReportRequestModel reportRequestModel) {
+    @RequestMapping(value = "/create", method = POST)
+    public ReportApiModel createReport(@Valid ReportRequestModel reportRequestModel) {
         ReportDatabaseModel reportDatabaseModel = reportService.createReport(reportRequestModel);
         return new ReportApiModel(reportDatabaseModel);
     }
