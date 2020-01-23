@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "https://techswitch-i-spy-staging.herokuapp.com", "https://techswitch-i-spy.herokuapp.com"})
 public class NukeController {
@@ -26,13 +29,13 @@ public class NukeController {
     }
 
     @RequestMapping(value = "/admin/are-you-sure")
-    public ResponseEntity<String> nukeDatabase(@RequestHeader(value = "token", required = false) String token) {
+    public ResponseEntity<Map<String, String>> nukeDatabase(@RequestHeader(value = "token", required = false) String token) {
 
         if(!tokenValidator.validateToken(token)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
         nukeService.truncateAllRowsInAllTables();
-        return ResponseEntity.status(HttpStatus.OK).body("Success Data Purged From Database");
+        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Error", "Success Data Purged From Database"));
     }
 }

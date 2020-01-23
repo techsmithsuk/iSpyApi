@@ -15,9 +15,7 @@ public class NukeService {
     }
 
     public void truncateAllRowsInAllTables() {
-        System.out.println("here");
         String SQL =    "TRUNCATE suspects, suspect_photo_urls, reports RESTART IDENTITY;";
-        System.out.println("now here");
         jdbi.withHandle(handle -> handle.createUpdate(SQL).execute());
     }
 }
