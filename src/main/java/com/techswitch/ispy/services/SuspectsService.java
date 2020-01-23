@@ -16,13 +16,12 @@ import java.util.Optional;
 @Service
 public class SuspectsService {
 
-    private Jdbi jdbi;
     private final String UPDATE_SUSPECT_QUERY_SCRIPT = "INSERT INTO suspects (title, date_of_birth, hair, eyes, height, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, warning_message, fbi_uid, modified, publication) \n" +
             "values (:title, :dateOfBirth, :hair, :eyes, :height, :weight, :sex, :race, :nationality, :scarsAndMarks, :rewardText, :caution, :details, :warningMessage, :fbiUid, :modified, :publication) ON CONFLICT (fbi_uid) DO NOTHING RETURNING id;";
 
     private final String UPDATE_SUSPECT_PHOTO_SCRIPT = "INSERT INTO suspect_photo_urls (suspectId, original, thumb, large, caption) VALUES (:suspectId, :original, :thumb, :large, :caption);";
 
-    private final String SELECT_ALL_SUSPECTS_SCRIPT = "select distinct on (suspects.id) " +
+    private final String GET_ALL_SUSPECTS_SCRIPT = "select distinct on (suspects.id) " +
             "suspects.id, suspects.title, suspects.date_of_birth, suspects.hair, suspects.eyes, suspects.height, " +
             "suspects.weight, suspects.sex, suspects.race, suspects.nationality, suspects.scars_and_marks, " +
             "suspects.reward_text, suspects.caution, suspects.details, suspects.warning_message, suspects.fbi_uid, " +
@@ -31,9 +30,16 @@ public class SuspectsService {
             "suspects " +
             "inner join " +
             "suspect_photo_urls on suspect_photo_urls.suspectid = suspects.id " +
-            "order by suspects.id, suspect_photo_urls.id asc " +
-            "LIMIT :limit OFFSET :offset;";
+            "order by suspects.id, suspect_photo_urls.id asc LIMIT :limit OFFSET :offset;";
 
+    private final String GET_SUSPECT_BY_ID_SCRIPT = "SELECT distinct on(suspects.id) " +
+            "    suspects.id, suspects.title, suspects.date_of_birth, suspects.hair, suspects.eyes, suspects.height, " +
+            "    suspects.weight, suspects.sex, suspects.race, suspects.nationality, suspects.scars_and_marks, " +
+            "    suspects.reward_text, suspects.caution, suspects.details, suspects.warning_message, suspects.fbi_uid, " +
+            "    suspects.modified, suspects.publication, suspect_photo_urls.original as image_url " +
+            "FROM suspects join suspect_photo_urls on suspects.id = suspect_photo_urls.suspectid where suspects.id = :id;";
+
+    private Jdbi jdbi;
 
     @Autowired
     public SuspectsService(Jdbi jdbi) {
@@ -41,7 +47,7 @@ public class SuspectsService {
     }
 
     public List<SuspectDatabaseModel> getAllSuspects(Filter filter) {
-        return jdbi.withHandle(handle -> handle.createQuery(SELECT_ALL_SUSPECTS_SCRIPT)
+        return jdbi.withHandle(handle -> handle.createQuery(GET_ALL_SUSPECTS_SCRIPT)
                 .bind("limit", filter.getPageSize())
                 .bind("offset", filter.getOffset())
                 .mapToBean(SuspectDatabaseModel.class)
@@ -49,7 +55,7 @@ public class SuspectsService {
     }
 
     public Optional<SuspectDatabaseModel> getSuspectById(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM suspects WHERE id = :id ")
+        return jdbi.withHandle(handle -> handle.createQuery(GET_SUSPECT_BY_ID_SCRIPT)
                 .bind("id", id)
                 .mapToBean(SuspectDatabaseModel.class)
                 .findOne());
@@ -102,5 +108,12 @@ public class SuspectsService {
             }
         }
         return 1;
+    }
+
+    public int countSuspects() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM suspects")
+                .mapTo(Integer.class)
+                .one());
     }
 }

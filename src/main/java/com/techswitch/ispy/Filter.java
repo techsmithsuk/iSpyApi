@@ -1,5 +1,8 @@
 package com.techswitch.ispy;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Filter {
 
     private Integer page;
@@ -20,6 +23,10 @@ public class Filter {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Integer getPage() {
+        return page;
     }
 
     public Integer getOffset() {
