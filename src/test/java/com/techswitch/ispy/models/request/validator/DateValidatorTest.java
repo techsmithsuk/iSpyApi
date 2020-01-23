@@ -12,7 +12,7 @@ public class DateValidatorTest {
 
     @Test
     public void dateValidatorReturnsTrueForValidDate() {
-        String validDate = "2018-04-13";
+        String validDate = "13-04-2018";
         boolean isValid = validator.isValid(validDate, null);
         assertThat(isValid).isTrue();
     }

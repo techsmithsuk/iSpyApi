@@ -22,7 +22,7 @@ public class ReportRequestModelTests {
 
     @Test
     public void fieldTest_givenValidReport_thenNoViolations() {
-        reportRequestModel = new ReportRequestModel(1L, "2018-04-13", "London", "Fake description");
+        reportRequestModel = new ReportRequestModel(1L, "13-04-2018", "London", "Fake description");
         Set<ConstraintViolation<ReportRequestModel>> violations = validator.validate(reportRequestModel);
         assertTrue(violations.isEmpty());
     }
@@ -31,7 +31,7 @@ public class ReportRequestModelTests {
     public void fieldTest_givenNullSuspectId_thenViolationCreated() {
         reportRequestModel = new ReportRequestModel();
         reportRequestModel.setSuspectId(null);
-        reportRequestModel.setDate("2018-04-13");
+        reportRequestModel.setDate("13-04-2018");
         reportRequestModel.setLocation("Location");
         reportRequestModel.setDescription("Fake Description");
         Set<ConstraintViolation<ReportRequestModel>> violations = validator.validate(reportRequestModel);
@@ -44,7 +44,7 @@ public class ReportRequestModelTests {
     public void fieldTest_givenEmptyDescription_thenViolationCreated() {
         reportRequestModel = new ReportRequestModel();
         reportRequestModel.setSuspectId(1L);
-        reportRequestModel.setDate("2018-04-13");
+        reportRequestModel.setDate("13-04-2018");
         reportRequestModel.setLocation("Location");
         reportRequestModel.setDescription("");
         Set<ConstraintViolation<ReportRequestModel>> violations = validator.validate(reportRequestModel);
@@ -57,7 +57,7 @@ public class ReportRequestModelTests {
     public void fieldTest_givenNullDescription_thenViolationCreated() {
         reportRequestModel = new ReportRequestModel();
         reportRequestModel.setSuspectId(1L);
-        reportRequestModel.setDate("2018-04-13");
+        reportRequestModel.setDate("13-04-2018");
         reportRequestModel.setLocation("Location");
         reportRequestModel.setDescription(null);
         Set<ConstraintViolation<ReportRequestModel>> violations = validator.validate(reportRequestModel);

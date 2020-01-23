@@ -12,7 +12,7 @@ import static com.techswitch.ispy.models.request.validator.DateValidator.DATE_FO
 public class ReportRequestModel {
     @NotNull(message = "Suspect ID cannot be null")
     private Long suspectId;
-    @ValidDate(message = "Please use a YYYY-MM-DD format for date")
+    @ValidDate(message = "Please use a DD-MM-YYYY format for date")
     private String date;
     private String location;
     @NotEmpty(message = "Description cannot be empty")
