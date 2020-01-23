@@ -64,13 +64,13 @@ class SuspectsControllerServiceTest {
 
     private Long addFakeImage(int id, int suspectId){
         return jdbi.withHandle(handle ->
-                handle.createQuery("insert into suspect_photo_urls (suspectId, original, thumb, large, caption) values (:suspectId, :original, :thumb, :large, :caption) returning id;")
+                handle.createQuery("insert into suspect_photo_urls (id, suspectId, original, thumb, large, caption) values (:id, :suspectId, :original, :thumb, :large, :caption) returning id;")
                         .bind("id", id)
                         .bind("suspectId", suspectId)
-                        .bind("original", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
-                        .bind("thumb", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
-                        .bind("large", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
-                        .bind("caption", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image")
+                        .bind("original", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/original")
+                        .bind("thumb", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/thumb")
+                        .bind("large", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/large")
+                        .bind("caption", "https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/caption")
                         .mapTo(Long.class)
                         .one());
     }
@@ -116,6 +116,18 @@ class SuspectsControllerServiceTest {
                 .andExpect(jsonPath("$.items.[0].fbiUid").value("thisisAtest"))
                 .andExpect(jsonPath("$.nextPage").value(nullValue()))
                 .andExpect(jsonPath("$.previousPage").value("/suspects?page=1&pageSize=1"))
+                .andReturn();
+    }
+
+    @Test
+    void getListOfImagesBySuspectId() throws Exception {
+        mockMvc.perform(get("http://localhost:8080/suspects/123/images"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].suspectId").value("123"))
+                .andExpect(jsonPath("[0].original").value("https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/original"))
+                .andExpect(jsonPath("[0].thumb").value("https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/thumb"))
+                .andExpect(jsonPath("[0].large").value("https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/large"))
+                .andExpect(jsonPath("[0].caption").value("https://www.fbi.gov/wanted/murders/jorge-ernesto-rico-ruvira/@@images/image/caption"))
                 .andReturn();
     }
 

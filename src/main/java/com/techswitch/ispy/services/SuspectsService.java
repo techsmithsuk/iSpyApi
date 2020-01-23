@@ -16,7 +16,6 @@ import java.util.Optional;
 @Service
 public class SuspectsService {
 
-    private Jdbi jdbi;
     private final String UPDATE_SUSPECT_QUERY_SCRIPT = "INSERT INTO suspects (title, date_of_birth, hair, eyes, height, weight, sex, race, nationality, scars_and_marks, reward_text, caution, details, warning_message, fbi_uid, modified, publication) \n" +
             "values (:title, :dateOfBirth, :hair, :eyes, :height, :weight, :sex, :race, :nationality, :scarsAndMarks, :rewardText, :caution, :details, :warningMessage, :fbiUid, :modified, :publication) ON CONFLICT (fbi_uid) DO NOTHING RETURNING id;";
 
@@ -34,6 +33,7 @@ public class SuspectsService {
             "order by suspects.id, suspect_photo_urls.id asc " +
             "LIMIT :limit OFFSET :offset;";
 
+    private Jdbi jdbi;
 
     @Autowired
     public SuspectsService(Jdbi jdbi) {

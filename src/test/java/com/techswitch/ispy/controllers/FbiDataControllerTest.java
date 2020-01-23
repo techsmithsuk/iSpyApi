@@ -63,7 +63,7 @@ public class FbiDataControllerTest {
     }
 
     @Test
-    public void fetchFbiData_givenAInalidToken_thenReturnStatusBADREQUEST() throws Exception {
+    public void fetchFbiData_givenAInvalidToken_thenReturnStatusBADREQUEST() throws Exception {
         mockMvc.perform(get("http://localhost:8080/admin/fetch-fbi-data")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("token", "invalid token"))

@@ -1,5 +1,8 @@
 package com.techswitch.ispy;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Filter {
 
     private Integer page;
