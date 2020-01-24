@@ -38,4 +38,6 @@ public class NukeController {
         nukeService.truncateAllRowsInAllTables();
         return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Success", "Data Purged From Database"));
     }
+
+
 }

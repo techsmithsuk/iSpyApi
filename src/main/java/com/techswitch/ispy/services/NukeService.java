@@ -18,4 +18,8 @@ public class NukeService {
         String SQL =    "TRUNCATE suspects, suspect_photo_urls, reports RESTART IDENTITY;";
         jdbi.withHandle(handle -> handle.createUpdate(SQL).execute());
     }
+
+    public boolean returnsTrue(){
+        return true;
+    }
 }
