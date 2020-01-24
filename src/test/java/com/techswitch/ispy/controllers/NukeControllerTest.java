@@ -13,8 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -80,5 +79,17 @@ public class NukeControllerTest {
     private Long countRows(String table){
         String SQL = "SELECT COUNT(*) FROM " + table + ";";
         return jdbi.withHandle(handle -> handle.createQuery(SQL).mapTo(Long.class).one());
+    }
+
+    @Test
+    public void itReturnsTrue(){
+
+        assertTrue(nukeService.returnsTrue());
+    }
+
+    @Test
+    public void itReturnsFalse(){
+
+        assertFalse(nukeService.returnsTrue());
     }
 }
